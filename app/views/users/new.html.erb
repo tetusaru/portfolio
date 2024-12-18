@@ -1,0 +1,48 @@
+<div class="min-h-screen bg-gray-50 flex flex-col justify-between">
+  <!-- ヘッダー -->
+  <%= render 'shared/header' %>
+
+  <!-- アカウント作成フォーム -->
+  <main class="flex-1 flex items-center justify-center px-4">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <h2 class="text-center text-2xl font-bold mb-6">アカウント作成</h2>
+
+      <!-- フォーム -->
+      <form action="#" method="post">
+        <!-- ユーザー名 -->
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 font-medium mb-2">ユーザー名</label>
+          <input type="text" id="username" name="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- メールアドレス -->
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-medium mb-2">メールアドレス</label>
+          <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- パスワード -->
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-medium mb-2">パスワード</label>
+          <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- パスワード（確認用） -->
+        <div class="mb-6">
+          <label for="password_confirmation" class="block text-gray-700 font-medium mb-2">パスワード（確認用）</label>
+          <input type="password" id="password_confirmation" name="password_confirmation" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- アカウント作成ボタン -->
+        <div class="mb-6">
+          <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+            アカウント作成
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <%= render 'shared/footer' %>
+</div>

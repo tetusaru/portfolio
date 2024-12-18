@@ -5,7 +5,7 @@ class User < ActiveRecord::Migration[8.0]
       t.string :name,             null: false
       t.string :password_digest
 
-      t.timestamps              null: false
+      t.timestamps null: false
     end
   end
 end

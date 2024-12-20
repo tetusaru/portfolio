@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
-  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %> 
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
   port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
   username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
@@ -10,7 +10,7 @@ default: &default
 
 development:
   <<: *default
-  database: mysauna_db
+  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
 
 test:
   <<: *default
@@ -20,20 +20,7 @@ test:
   password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", nil) %>
 
 production:
-  primary: &primary_production
-    <<: *default
-    database: <%= ENV.fetch("DATABASE_NAME", "myapp_production") %>
-    username: <%= ENV.fetch("DATABASE_USER", "myapp") %>
-    password: <%= ENV.fetch("MYAPP_DATABASE_PASSWORD", nil) %>
-  cache:
-    <<: *primary_production
-    database: myapp_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: myapp_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: myapp_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
+  username: <%= ENV.fetch("DATABASE_USER", "mysauna_db_user") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>

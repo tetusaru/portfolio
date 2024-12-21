@@ -32,3 +32,9 @@ cable:
   database: <%= ENV.fetch("CABLE_DATABASE_NAME", "mysauna_cable") %>
   username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %> 
   password: <%= ENV.fetch("CABLE_DATABASE_PASSWORD", nil) %>
+
+queue:
+  <<: *default
+  database: <%= ENV.fetch("QUEUE_DATABASE_NAME", "mysauna_queue") %>
+  username: <%= ENV.fetch("QUEUE_DATABASE_USER", "queue_user") %>
+  password: <%= ENV.fetch("QUEUE_DATABASE_PASSWORD", nil) %>

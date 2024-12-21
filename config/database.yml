@@ -1,32 +1,34 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
-  host: <%= ENV.fetch("DATABASE_HOST", "db") %>
-  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
-  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
-  database: <%= ENV.fetch("DATABASE_NAME", "app_development") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %> # デフォルトスレッドプールの最大値
+  host: <%= ENV.fetch("DATABASE_HOST", "db") %> # デフォルトホスト
+  port: <%= ENV.fetch("DATABASE_PORT", 5432) %> # ポート番号
+  username: <%= ENV.fetch("DATABASE_USER", "postgres") %> # ユーザー名
+  password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %> # パスワード
+  database: <%= ENV.fetch("DATABASE_NAME", "app_development") %> # データベース名
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
+  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db_development") %> # 開発環境用データベース名
+  host: <%= ENV.fetch("DEV_DATABASE_HOST", "localhost") %> # 開発環境用ホスト
 
 test:
   <<: *default
-  database: mysauna_test
-  host: <%= ENV.fetch("TEST_DATABASE_HOST", "db") %>
-  username: <%= ENV.fetch("TEST_DATABASE_USER", "postgres") %>
-  password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", nil) %>
+  database: <%= ENV.fetch("TEST_DATABASE_NAME", "mysauna_test") %> # テスト用データベース名
+  host: <%= ENV.fetch("TEST_DATABASE_HOST", "localhost") %> # テスト用ホスト
+  username: <%= ENV.fetch("TEST_DATABASE_USER", "postgres") %> # テスト用ユーザー名
+  password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", nil) %> # テスト用パスワード
 
 production:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
-  username: <%= ENV.fetch("DATABASE_USER", "mysauna_db_user") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
+  database: <%= ENV.fetch("PROD_DATABASE_NAME", "mysauna_db") %> # 本番環境用データベース名
+  username: <%= ENV.fetch("PROD_DATABASE_USER", "mysauna_db_user") %> # 本番用ユーザー名
+  password: <%= ENV.fetch("PROD_DATABASE_PASSWORD", nil) %> # 本番用パスワード
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %> # 本番環境ではデフォルトを10に
 
 cable:
   <<: *default
-  database: <%= ENV.fetch("CABLE_DATABASE_NAME", "mysauna_cable") %>
-  username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %>
-  password: <%= ENV.fetch("CABLE_DATABASE_PASSWORD", nil) %>
+  database: <%= ENV.fetch("CABLE_DATABASE_NAME", "mysauna_cable") %> # アクションケーブル用データベース名
+  username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %> # アクションケーブル用ユーザー名
+  password: <%= ENV.fetch("CABLE_DATABASE_PASSWORD", nil) %> # アクションケーブル用パスワード

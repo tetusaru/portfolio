@@ -30,5 +30,5 @@ production:
 cable:
   <<: *default
   database: <%= ENV.fetch("CABLE_DATABASE_NAME", "mysauna_cable") %>
-  username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %>
+  username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %> 
   password: <%= ENV.fetch("CABLE_DATABASE_PASSWORD", nil) %>

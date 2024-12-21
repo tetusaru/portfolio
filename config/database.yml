@@ -10,23 +10,25 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
+  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db_development") %>
+  host: <%= ENV.fetch("DEV_DATABASE_HOST", "localhost") %>
 
 test:
   <<: *default
-  database: mysauna_test
-  host: <%= ENV.fetch("TEST_DATABASE_HOST", "db") %>
+  database: <%= ENV.fetch("TEST_DATABASE_NAME", "mysauna_test") %>
+  host: <%= ENV.fetch("TEST_DATABASE_HOST", "localhost") %>
   username: <%= ENV.fetch("TEST_DATABASE_USER", "postgres") %>
   password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", nil) %>
 
 production:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
-  username: <%= ENV.fetch("DATABASE_USER", "mysauna_db_user") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
+  database: <%= ENV.fetch("PROD_DATABASE_NAME", "mysauna_db") %>
+  username: <%= ENV.fetch("PROD_DATABASE_USER", "mysauna_db_user") %>
+  password: <%= ENV.fetch("PROD_DATABASE_PASSWORD", nil) %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %>
 
 cable:
   <<: *default
   database: <%= ENV.fetch("CABLE_DATABASE_NAME", "mysauna_cable") %>
-  username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %>
+  username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %> 
   password: <%= ENV.fetch("CABLE_DATABASE_PASSWORD", nil) %>

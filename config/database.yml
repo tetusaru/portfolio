@@ -38,3 +38,9 @@ queue:
   database: <%= ENV.fetch("QUEUE_DATABASE_NAME", "mysauna_queue") %>
   username: <%= ENV.fetch("QUEUE_DATABASE_USER", "queue_user") %>
   password: <%= ENV.fetch("QUEUE_DATABASE_PASSWORD", nil) %>
+
+cache:
+  <<: *default
+  database: <%= ENV.fetch("CACHE_DATABASE_NAME", "mysauna_cache") %>
+  username: <%= ENV.fetch("CACHE_DATABASE_USER", "cache_user") %>
+  password: <%= ENV.fetch("CACHE_DATABASE_PASSWORD", nil) %>

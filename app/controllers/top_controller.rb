@@ -3,4 +3,8 @@ class TopController < ApplicationController
 
   def index
   end
+
+  def survey
+    # アンケートページ用の処理 (必要に応じてデータを渡す)
+  end
 end

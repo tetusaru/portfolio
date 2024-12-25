@@ -1,0 +1,14 @@
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
+  <h1 class="text-lg text-gray-500 mt-10">自分好みのサウナについて答えてみよう！</h1>
+  <h2 class="text-2xl font-bold text-black my-4">アンケート</h2>
+
+  <!-- アンケートフォーム -->
+  <form action="/results" method="post" class="space-y-4">
+    <div>
+      <label>熱いサウナが好き？</label><br>
+      <button type="submit" name="hot_sauna" value="yes" class="bg-blue-500 text-white px-4 py-2 rounded">はい！</button>
+      <button type="submit" name="hot_sauna" value="no" class="bg-gray-500 text-white px-4 py-2 rounded">いいえ</button>
+    </div>
+    <!-- 他の質問を追加 -->
+  </form>
+</main>

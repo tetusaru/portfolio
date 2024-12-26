@@ -1,0 +1,36 @@
+<%= render 'shared/header' %>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+  <h1 class="text-2xl font-bold text-gray-800 mb-4">自分の好みのサウナについて答えてみよう！</h1>
+  
+  <!-- アンケート部分 -->
+  <div class="w-full max-w-md space-y-6">
+    <div>
+      <p class="text-lg text-gray-700 mb-2">性別</p>
+      <div class="flex space-x-4">
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">男性</button>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">女性</button>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-lg text-gray-700 mb-2">どこのサウナ？</p>
+      <div class="flex flex-col">
+        <input 
+          type="text" 
+          placeholder="記入してね（都道府県）" 
+          class="border-gray-300 border rounded py-2 px-4 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <p class="text-sm text-gray-500">記入例：千葉県</p>
+      </div>
+    </div>
+
+    <!-- 探すボタン -->
+    <div class="flex justify-center mt-6">
+      <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+        探す
+      </button>
+    </div>
+  </div>
+</main>
+
+<%= render 'shared/footer' %>

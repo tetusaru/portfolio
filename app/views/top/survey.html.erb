@@ -1,0 +1,39 @@
+<%= render 'shared/header' %>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+  <h1 class="text-2xl font-bold text-gray-800 mb-4">自分の好みのサウナについて答えてみよう！</h1>
+  
+  <!-- アンケート部分 -->
+  <div class="w-full max-w-md space-y-6">
+    <div>
+      <p class="text-lg text-gray-700 mb-2">熱いサウナが好き？</p>
+      <div class="flex space-x-4">
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">はい！</button>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">いいえ</button>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-lg text-gray-700 mb-2">外気浴でゆっくりしたい？</p>
+      <div class="flex space-x-4">
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">はい！</button>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">いいえ</button>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-lg text-gray-700 mb-2">水風呂は冷たいのがお好み？</p>
+      <div class="flex space-x-4">
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">はい！</button>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">いいえ</button>
+      </div>
+    </div>
+
+    <!-- 次へボタン -->
+    <div class="flex justify-center mt-6">
+      <a href="<%= survey_step2_path %>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 text-center">次へ</a>
+    </div>
+  </div>
+</main>
+
+<%= render 'shared/footer' %>

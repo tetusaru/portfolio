@@ -10,21 +10,21 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db_development") %>
-  host: <%= ENV.fetch("DEV_DATABASE_HOST", "localhost") %>
+  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
+  host: <%= ENV.fetch("DEV_DATABASE_HOST", "db") %>
 
 test:
   <<: *default
   database: <%= ENV.fetch("TEST_DATABASE_NAME", "mysauna_test") %>
-  host: <%= ENV.fetch("TEST_DATABASE_HOST", "localhost") %>
-  username: <%= ENV.fetch("TEST_DATABASE_USER", "postgres") %>
-  password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", nil) %>
+  host: <%= ENV.fetch("TEST_DATABASE_HOST", "db") %>
+  username: <%= ENV.fetch("TEST_DATABASE_USER", "my_test_user") %> # Docker 内の設定と一致
+  password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", "Wctx4PRip21ECfGbW3sgUR9fas7YFl5s") %> # Docker の POSTGRES_PASSWORD に一致
 
 production:
   <<: *default
   database: <%= ENV.fetch("PROD_DATABASE_NAME", "mysauna_db") %>
   username: <%= ENV.fetch("PROD_DATABASE_USER", "mysauna_db_user") %>
-  password: <%= ENV.fetch("PROD_DATABASE_PASSWORD", nil) %>
+  password: <%= ENV.fetch("PROD_DATABASE_PASSWORD", "Wctx4PRip21ECfGbW3sgUR9fas7YFl5s") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %>
 
 cable:
@@ -43,4 +43,4 @@ cache:
   <<: *default
   database: <%= ENV.fetch("CACHE_DATABASE_NAME", "mysauna_cache") %>
   username: <%= ENV.fetch("CACHE_DATABASE_USER", "cache_user") %>
-  password: <%= ENV.fetch("CACHE_DATABASE_PASSWORD", nil) %> 
+  password: <%= ENV.fetch("CACHE_DATABASE_PASSWORD", nil) %>

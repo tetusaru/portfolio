@@ -243,7 +243,6 @@ Rails.application.config.sorcery.configure do |config|
   # config.battlenet.scope = "openid"
   # --- user config ---
   config.user_config do |user|
-
     user.salt_attribute_name = nil
     # -- core --
     # Specify username attributes, for example: [:username, :email].

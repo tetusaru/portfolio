@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "top#index"
-  resources :users, only: [:new, :create, :show] do
+  resources :users, only: [ :new, :create, :show ] do
     member do
       get :mypage
     end

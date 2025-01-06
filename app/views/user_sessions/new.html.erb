@@ -2,6 +2,12 @@
   <!-- ヘッダー -->
   <%= render 'shared/header' %>
 
+  <% if flash[:notice] %>
+  <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
+    <p><%= flash[:notice] %></p>
+  </div>
+ <% end %>
+
   <!-- ログインフォーム -->
   <main class="flex-1 flex items-center justify-center px-4">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -35,7 +41,7 @@
 
         <!-- 新規登録リンク -->
         <div class="text-center text-gray-600">
-          <p>はじめての方はこちら</p>
+          <%= link_to 'はじめての方はこちら', signup_path, class: 'text-blue-500 hover:underline' %>
         </div>
       </form>
     </div>

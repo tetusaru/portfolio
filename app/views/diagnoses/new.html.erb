@@ -1,0 +1,31 @@
+<%= render 'shared/header' %>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+  <h1 class="text-2xl font-bold text-gray-800 mb-4">診断を始めましょう！</h1>
+  
+  <!-- アンケート部分 -->
+  <div class="w-full max-w-md space-y-6">
+    <% if @questions.present? %> <!-- @questions が存在するか確認 -->
+      <% @questions.each do |question| %>
+        <div>
+          <p class="text-lg text-gray-700 mb-2"><%= question.question_text %></p>
+          <div class="flex space-x-4">
+            <%= form_with model: @diagnosis, url: diagnoses_path, method: :post, local: true do |f| %>
+              <!-- 回答を送信するためのフォーム -->
+              <%= f.hidden_field :answers_attributes, value: { question_id: question.id, answer_value: "yes" }.to_json %>
+              <%= f.submit "はい！", class: "bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" %>
+            <% end %>
+            <%= form_with model: @diagnosis, url: diagnoses_path, method: :post, local: true do |f| %>
+              <%= f.hidden_field :answers_attributes, value: { question_id: question.id, answer_value: "no" }.to_json %>
+              <%= f.submit "いいえ", class: "bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>現在、質問が登録されていません。</p> <!-- 質問がない場合の表示 -->
+    <% end %>
+  </div>
+</main>
+
+<%= render 'shared/footer' %>

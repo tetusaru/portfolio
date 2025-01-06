@@ -1,0 +1,22 @@
+<%= render 'shared/header' %>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+  <h1 class="text-2xl font-bold text-gray-800 mb-4">診断結果</h1>
+
+  <div class="w-full max-w-4xl space-y-6">
+    <% @recommended_saunas.each do |result| %>
+      <div class="bg-white rounded shadow p-4 flex">
+        <div class="w-1/3">
+          <img src="<%= result.sauna_facility.image_url %>" alt="<%= result.sauna_facility.name %>" class="rounded object-cover">
+        </div>
+        <div class="w-2/3 pl-4">
+          <h2 class="text-xl font-bold text-gray-800"><%= result.sauna_facility.name %></h2>
+          <p class="text-gray-600 mt-2"><%= result.recommendation %></p>
+          <p class="text-sm text-gray-500 mt-2">場所: <%= result.sauna_facility.location %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>
+
+<%= render 'shared/footer' %>

@@ -5,10 +5,18 @@ class TopController < ApplicationController
   end
 
   def survey
-    # アンケートページ用の処理 (必要に応じてデータを渡す)
+    @questions_page1 = [
+      { id: 1, text: "熱いサウナが好き？" },
+      { id: 2, text: "外気浴でゆっくりしたい？" },
+      { id: 3, text: "水風呂は冷たいのが好み？" }
+    ]
   end
 
   def survey_step2
-    # アンケートページ2用の処理 (必要に応じてデータを渡す)
+    @questions_page2 = [
+      { id: 4, text: "性別は？" },
+      { id: 5, text: "どこのサウナを探している？" }
+    ]
+    @previous_answers = params[:answers] || {}
   end
 end

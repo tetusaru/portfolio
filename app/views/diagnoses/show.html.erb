@@ -1,0 +1,22 @@
+<%= render 'shared/header' %>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">診断結果</h1>
+
+  <% if @result %>
+    <div class="bg-white rounded shadow-md p-6 max-w-lg text-center">
+      <h2 class="text-xl font-bold text-gray-900"><%= @result.name %></h2>
+      <p class="text-gray-600 mt-2">場所: <%= @result.location %></p>
+    </div>
+  <% else %>
+    <div class="bg-red-100 rounded shadow-md p-6 max-w-lg text-center">
+      <p class="text-gray-800"><%= @message %></p>
+    </div>
+  <% end %>
+
+  <div class="mt-6">
+    <a href="<%= survey_path %>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">もう1度診断する</a>
+  </div>
+</main>
+
+<%= render 'shared/footer' %>

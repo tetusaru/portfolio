@@ -1,6 +1,6 @@
 class SaunaFacility < ApplicationRecord
   has_many :diagnosis_results, dependent: :destroy
-  
+
   validates :name, presence: true
   validates :location, presence: true
   validates :hot_sauna, inclusion: { in: [true, false] }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_26_014213) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_06_061539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,12 +20,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_26_014213) do
     t.string "answer_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "diagnosis_id", null: false
+    t.index ["diagnosis_id"], name: "index_answers_on_diagnosis_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "diagnoses", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.text "questions"
     t.string "answers"
     t.datetime "created_at", null: false
@@ -62,6 +64,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_26_014213) do
     t.text "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hot_sauna", default: false, null: false
+    t.boolean "outdoor_bath", default: false, null: false
+    t.boolean "cold_bath", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,6 +78,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_26_014213) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "answers", "diagnoses"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "diagnoses", "users"

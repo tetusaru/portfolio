@@ -1,0 +1,2 @@
+module SaunaFacilitiesHelper
+end

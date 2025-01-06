@@ -3,7 +3,7 @@ class SaunaFacility < ApplicationRecord
 
   validates :name, presence: true
   validates :location, presence: true
-  validates :hot_sauna, inclusion: { in: [true, false] }
-  validates :outdoor_bath, inclusion: { in: [true, false] }
-  validates :cold_bath, inclusion: { in: [true, false] }
+  validates :hot_sauna, inclusion: { in: [ true, false ] }
+  validates :outdoor_bath, inclusion: { in: [ true, false ] }
+  validates :cold_bath, inclusion: { in: [ true, false ] }
 end

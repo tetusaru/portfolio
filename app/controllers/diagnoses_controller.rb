@@ -1,7 +1,7 @@
 class DiagnosesController < ApplicationController
   def create
     Rails.logger.debug "受信した回答: #{params[:answers].inspect}"
-  
+
     # サウナ施設のフィルタリング
     facilities = SaunaFacility.all
     facilities = facilities.where(hot_sauna: true) if params[:answers]["1"] == "yes"
@@ -11,10 +11,10 @@ class DiagnosesController < ApplicationController
     facilities = facilities.where(cold_bath: true) if params[:answers]["3"] == "yes"
     facilities = facilities.where(cold_bath: false) if params[:answers]["3"] == "no"
     facilities = facilities.where("location LIKE ?", "%#{params[:answers]['5']}%") if params[:answers]["5"].present?
-  
+
     Rails.logger.debug "絞り込まれた施設: #{facilities.map(&:name).inspect}"
     @result = facilities.first
-  
+
     if @result
       Rails.logger.debug "選択された施設: #{@result.name}"
       redirect_to diagnosis_path(id: @result.id)

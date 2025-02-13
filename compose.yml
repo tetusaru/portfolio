@@ -1,21 +1,22 @@
 services:
   db:
-    image: postgres
+    image: postgres:14
     restart: always
     environment:
       TZ: Asia/Tokyo
-      POSTGRES_USER: mysauna_db_user # Render.com の Username
-      POSTGRES_PASSWORD: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s # Render.com の Password
-      POSTGRES_DB: mysauna_db # Render.com の Database
+      POSTGRES_USER: mysauna_db_user
+      POSTGRES_PASSWORD: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s
+      POSTGRES_DB: mysauna_db
     volumes:
-      - postgresql_data:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5433:5432
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d mysauna_db -U mysauna_db_user"]
+      test: ["CMD-SHELL", "pg_isready -U mysauna_db_user -d mysauna_db -h db"]
       interval: 10s
       timeout: 5s
       retries: 5
+
   web:
     build:
       context: .
@@ -29,17 +30,18 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
-      DATABASE_HOST: db # 開発環境と Render.com に合わせる
+      DATABASE_HOST: db
       DATABASE_PORT: 5432
-      DATABASE_NAME: mysauna_db # 開発用データベース
-      TEST_DATABASE_NAME: mysauna_test # テスト用データベース
+      DATABASE_NAME: mysauna_db
+      TEST_DATABASE_NAME: mysauna_test
       DATABASE_USER: mysauna_db_user
-      DATABASE_PASSWORD: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s # Render.com の Password
+      DATABASE_PASSWORD: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
+
 volumes:
   bundle_data:
   postgresql_data:

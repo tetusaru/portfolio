@@ -3,29 +3,33 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
   host: <%= ENV.fetch("DATABASE_HOST", "db") %>
-  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
-  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+  port: <%= ENV.fetch("DATABASE_PORT", 5433) %>
+  username: <%= ENV.fetch("DATABASE_USER", "mysauna_db_user") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
-  database: <%= ENV.fetch("DATABASE_NAME", "app_development") %>
+  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "mysauna_db") %>
-  host: <%= ENV.fetch("DEV_DATABASE_HOST", "db") %>
+  database: mysauna_db
+  username: mysauna_db_user
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "Wctx4PRip21ECfGbW3sgUR9fas7YFl5s") %>
+  host: db
 
 test:
   <<: *default
-  database: <%= ENV.fetch("TEST_DATABASE_NAME", "mysauna_test") %>
-  host: <%= ENV.fetch("TEST_DATABASE_HOST", "db") %>
-  username: <%= ENV.fetch("TEST_DATABASE_USER", "my_test_user") %> # Docker 内の設定と一致
-  password: <%= ENV.fetch("TEST_DATABASE_PASSWORD", "Wctx4PRip21ECfGbW3sgUR9fas7YFl5s") %> # Docker の POSTGRES_PASSWORD に一致
+  database: mysauna_test
+  username: mysauna_db_user
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "Wctx4PRip21ECfGbW3sgUR9fas7YFl5s") %>
+  host: db
 
 production:
   <<: *default
-  database: <%= ENV.fetch("PROD_DATABASE_NAME", "mysauna_db") %>
-  username: <%= ENV.fetch("PROD_DATABASE_USER", "mysauna_db_user") %>
-  password: <%= ENV.fetch("PROD_DATABASE_PASSWORD", "Wctx4PRip21ECfGbW3sgUR9fas7YFl5s") %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %>
+  database: mysauna_db
+  username: mysauna_db_user
+  password: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s
+  host: dpg-ctgf2iilqhvc739jldqg-a.singapore-postgres.render.com
+  port: 5432
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %> 
 
 cable:
   <<: *default

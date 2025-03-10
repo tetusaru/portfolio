@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
   resources :diagnoses, only: [ :create, :show ]
-  resources :sauna_facilities, only: [ :index ]
+  resources :sauna_facilities, only: [ :index, :show ]
 
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"

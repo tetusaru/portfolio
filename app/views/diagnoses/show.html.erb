@@ -7,6 +7,9 @@
     <div class="bg-white rounded shadow-md p-6 max-w-lg text-center">
       <h2 class="text-xl font-bold text-gray-900"><%= @result.name %></h2>
       <p class="text-gray-600 mt-2">場所: <%= @result.location %></p>
+      <a href="<%= sauna_facility_path(@result) %>" class="text-blue-500 hover:underline">
+        詳細を見る
+      </a>
     </div>
   <% else %>
     <div class="bg-red-100 rounded shadow-md p-6 max-w-lg text-center">

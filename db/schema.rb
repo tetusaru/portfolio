@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_06_100629) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_01_101615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_06_100629) do
     t.boolean "hot_sauna", default: false, null: false
     t.boolean "outdoor_bath", default: false, null: false
     t.boolean "cold_bath", default: false, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "users", force: :cascade do |t|

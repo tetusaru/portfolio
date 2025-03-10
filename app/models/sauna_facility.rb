@@ -1,5 +1,5 @@
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class SaunaFacility < ApplicationRecord
   has_many :diagnosis_results, dependent: :destroy
@@ -25,7 +25,7 @@ class SaunaFacility < ApplicationRecord
   def set_coordinates
     return if location.blank?
 
-    api_key = ENV['GOOGLE_MAPS_API_KEY']
+    api_key = ENV["GOOGLE_MAPS_API_KEY"]
     return unless api_key.present?
 
     address = "#{self.location}, Japan"

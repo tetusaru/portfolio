@@ -1,13 +1,15 @@
 class DiagnosesController < ApplicationController
-  skip_before_action :require_login, only: [ :survey, :answer, :create, :show ]
+  skip_before_action :require_login, only: [:survey, :answer, :create, :show]
 
   def survey
     @questions = [
-      { id: 1, text: "熱いサウナが好き？" },
-      { id: 2, text: "外気浴でゆっくりしたい？" },
-      { id: 3, text: "水風呂は冷たいのが好み？" },
-      { id: 4, text: "性別を選択してください", options: [ "男性", "女性" ] },
-      { id: 5, text: "お住まいの地域を選択してください", options: [ "東京都", "千葉県", "神奈川県", "埼玉県" ] }
+      { id: 1, text: "お好みのサウナのアツさは？", options: ["ゲキアツ", "アツい", "普通", "低め"] },
+      { id: 2, text: "外気浴でゆっくりしたい？", options: ["はい", "いいえ"] },
+      { id: 3, text: "水風呂は冷たいのが好み？", options: ["はい", "いいえ"] },
+      { id: 4, text: "サウナ施設 or スーパー銭湯", options: ["サウナ施設", "スーパー銭湯"] },
+      { id: 5, text: "古き良き雰囲気 or 新しく綺麗な感じ", options: ["古き良き", "新しく綺麗"] },
+      { id: 6, text: "性別を選択してください", options: ["男性", "女性"] },
+      { id: 7, text: "お住まいの地域を入力してください" }
     ]
 
     unless params[:question_id].present?
@@ -24,35 +26,36 @@ class DiagnosesController < ApplicationController
 
     next_question_id = params[:question_id].to_i + 1
 
-    if next_question_id <= 5
+    if next_question_id <= 7
       redirect_to survey_path(question_id: next_question_id)
     else
-      # ここは使われない（最後はcreateに飛ばす）
-      redirect_to root_path
+      redirect_to survey_finish_path
     end
   end
 
   def create
     session[:answers][params[:question_id]] = params[:answer]
     Rails.logger.debug "最終的な受信した回答: #{session[:answers].inspect}"
-
+  
+    # 入力チェック：全て空 or location未記入の場合は no_result を返す
+    if session[:answers].values.all?(&:blank?) || session[:answers]["7"].blank?
+      redirect_to diagnosis_path(id: 0, no_result: true) and return
+    end
+  
     facilities = SaunaFacility.all
-    facilities = facilities.where(hot_sauna: true) if session[:answers]["1"] == "yes"
-    facilities = facilities.where(hot_sauna: false) if session[:answers]["1"] == "no"
+    facilities = facilities.where(temperature_level: session[:answers]["1"]) if session[:answers]["1"].present?
     facilities = facilities.where(outdoor_bath: true) if session[:answers]["2"] == "yes"
-    facilities = facilities.where(outdoor_bath: false) if session[:answers]["2"] == "no"
     facilities = facilities.where(cold_bath: true) if session[:answers]["3"] == "yes"
-    facilities = facilities.where(cold_bath: false) if session[:answers]["3"] == "no"
+    facilities = facilities.where(facility_type: session[:answers]["4"]) if session[:answers]["4"].present?
     facilities = facilities.where("location LIKE ?", "%#{session[:answers]['5']}%") if session[:answers]["5"].present?
-
+    facilities = facilities.where(atmosphere: session[:answers]["6"]) if session[:answers]["6"].present?
+  
     Rails.logger.debug "絞り込まれた施設: #{facilities.map(&:name).inspect}"
     @result = facilities.first
-
+  
     if @result
-      Rails.logger.debug "選択された施設: #{@result.name}"
       redirect_to diagnosis_path(id: @result.id)
     else
-      Rails.logger.debug "該当する施設がありません"
       redirect_to diagnosis_path(id: 0, no_result: true)
     end
   end

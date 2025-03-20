@@ -1,5 +1,5 @@
 class DiagnosesController < ApplicationController
-  skip_before_action :require_login, only: [:survey, :answer, :create, :show]
+  skip_before_action :require_login, only: [ :survey, :answer, :create, :show ]
 
   # マッピング定義
   TEMPERATURE_MAP = {
@@ -21,12 +21,12 @@ class DiagnosesController < ApplicationController
 
   def survey
     @questions = [
-      { id: 1, text: "お好みのサウナのアツさは？", options: ["ゲキアツ", "アツい", "普通", "低め"] },
-      { id: 2, text: "外気浴でゆっくりしたい？", options: ["はい", "いいえ"] },
-      { id: 3, text: "水風呂は冷たいのが好み？", options: ["はい", "いいえ"] },
-      { id: 4, text: "サウナ施設 or スーパー銭湯", options: ["サウナ施設", "スーパー銭湯"] },
-      { id: 5, text: "古き良き雰囲気 or 新しく綺麗な感じ", options: ["古き良き", "新しく綺麗"] },
-      { id: 6, text: "性別を選択してください", options: ["男性", "女性"] },
+      { id: 1, text: "お好みのサウナのアツさは？", options: [ "ゲキアツ", "アツい", "普通", "低め" ] },
+      { id: 2, text: "外気浴でゆっくりしたい？", options: [ "はい", "いいえ" ] },
+      { id: 3, text: "水風呂は冷たいのが好み？", options: [ "はい", "いいえ" ] },
+      { id: 4, text: "サウナ施設 or スーパー銭湯", options: [ "サウナ施設", "スーパー銭湯" ] },
+      { id: 5, text: "古き良き雰囲気 or 新しく綺麗な感じ", options: [ "古き良き", "新しく綺麗" ] },
+      { id: 6, text: "性別を選択してください", options: [ "男性", "女性" ] },
       { id: 7, text: "お住まいの地域を入力してください" }
     ]
 

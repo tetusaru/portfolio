@@ -21,8 +21,8 @@ class DiagnosesController < ApplicationController
   end
 
   def answer
-    session[ :answers ] ||= {}
-    session[ :answers ][params[:question_id]] = params[ :answer ]
+    session[:answers] ||= {}
+    session[:answers][params[:question_id]] = params[:answer]
 
     next_question_id = params[:question_id].to_i + 1
 
@@ -34,7 +34,7 @@ class DiagnosesController < ApplicationController
   end
 
   def create
-    session[ :answers ][params[:question_id]] = params[ :answer ]
+    session[:answers][params[:question_id]] = params[:answer]
     Rails.logger.debug "最終的な受信した回答: #{session[:answers].inspect}"
   
     # 入力チェック：全て空 or location未記入の場合は no_result を返す

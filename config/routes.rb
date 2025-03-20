@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
   get "signup", to: "users#new", as: "signup"
   get "/maintenance", to: "pages#maintenance", as: "maintenance"
-  post '/survey/finish', to: 'diagnoses#create', as: :survey_finish
+  post "/survey/finish", to: "diagnoses#create", as: :survey_finish
 end

@@ -6,7 +6,7 @@ class DiagnosesController < ApplicationController
       { id: 1, text: "熱いサウナが好き？" },
       { id: 2, text: "外気浴でゆっくりしたい？" },
       { id: 3, text: "水風呂は冷たいのが好み？" },
-      { id: 4, text: "性別を選択してください", options: [ "男性" , "女性" ] },
+      { id: 4, text: "性別を選択してください", options: [ "男性", "女性" ] },
       { id: 5, text: "お住まいの地域を選択してください", options: [ "東京都", "千葉県", "神奈川県", "埼玉県" ] }
     ]
 

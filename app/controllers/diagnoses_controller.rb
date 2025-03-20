@@ -1,6 +1,24 @@
 class DiagnosesController < ApplicationController
   skip_before_action :require_login, only: [ :survey, :answer, :create, :show ]
 
+  # マッピング定義
+  TEMPERATURE_MAP = {
+    "ゲキアツ" => "very_hot",
+    "アツい" => "hot",
+    "普通" => "normal",
+    "低め" => "mild"
+  }
+
+  FACILITY_TYPE_MAP = {
+    "サウナ施設" => "sauna",
+    "スーパー銭湯" => "super_sento"
+  }
+
+  ATMOSPHERE_MAP = {
+    "古き良き" => "classic",
+    "新しく綺麗" => "modern"
+  }
+
   def survey
     @questions = [
       { id: 1, text: "お好みのサウナのアツさは？", options: [ "ゲキアツ", "アツい", "普通", "低め" ] },
@@ -37,18 +55,17 @@ class DiagnosesController < ApplicationController
     session[:answers][params[:question_id]] = params[:answer]
     Rails.logger.debug "最終的な受信した回答: #{session[:answers].inspect}"
 
-    # 入力チェック：全て空 or location未記入の場合は no_result を返す
     if session[:answers].values.all?(&:blank?) || session[:answers]["7"].blank?
       redirect_to diagnosis_path(id: 0, no_result: true) and return
     end
 
     facilities = SaunaFacility.all
-    facilities = facilities.where(temperature_level: session[:answers]["1"]) if session[:answers]["1"].present?
-    facilities = facilities.where(outdoor_bath: true) if session[:answers]["2"] == "yes"
-    facilities = facilities.where(cold_bath: true) if session[:answers]["3"] == "yes"
-    facilities = facilities.where(facility_type: session[:answers]["4"]) if session[:answers]["4"].present?
-    facilities = facilities.where("location LIKE ?", "%#{session[:answers]['5']}%") if session[:answers]["5"].present?
-    facilities = facilities.where(atmosphere: session[:answers]["6"]) if session[:answers]["6"].present?
+    facilities = facilities.where(temperature_level: TEMPERATURE_MAP[session[:answers]["1"]]) if session[:answers]["1"].present?
+    facilities = facilities.where(outdoor_bath: true) if session[:answers]["2"] == "はい"
+    facilities = facilities.where(cold_bath: true) if session[:answers]["3"] == "はい"
+    facilities = facilities.where(facility_type: FACILITY_TYPE_MAP[session[:answers]["4"]]) if session[:answers]["4"].present?
+    facilities = facilities.where("location LIKE ?", "%#{session[:answers]['7']}%") if session[:answers]["7"].present?
+    facilities = facilities.where(atmosphere: ATMOSPHERE_MAP[session[:answers]["5"]]) if session[:answers]["5"].present?
 
     Rails.logger.debug "絞り込まれた施設: #{facilities.map(&:name).inspect}"
     @result = facilities.first

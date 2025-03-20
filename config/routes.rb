@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :diagnoses, only: [:create, :show]
-  resources :sauna_facilities, only: [:index, :show]
+  resources :diagnoses, only: [ :create, :show ]
+  resources :sauna_facilities, only: [ :index, :show ]
 
   get "/survey", to: "diagnoses#survey"
   post "/survey/answer", to: "diagnoses#answer"

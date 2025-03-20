@@ -1,0 +1,51 @@
+<%= render 'shared/header' %>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+  <h1 class="text-3xl font-extrabold text-gray-800 mb-10 text-center tracking-wide">
+    あなたのサウナ好みを教えてください
+  </h1>
+
+  <% if @current_question %>
+    <div class="bg-white rounded-3xl shadow-xl p-8 max-w-md w-full border border-gray-200 flex flex-col items-center space-y-6 transition-all duration-300 ease-in-out">
+      <h2 class="text-xl font-semibold text-gray-700 text-center"><%= @current_question[:text] %></h2>
+
+      <%= form_with url: (@current_question[:id] == 5 ? "/survey/finish" : "/survey/answer"), method: :post, local: true, class: "w-full flex flex-col items-center space-y-6" do |f| %>
+        <%= hidden_field_tag :question_id, @current_question[:id] %>
+
+        <div class="flex flex-col items-center space-y-4">
+          <% if @current_question[:id] == 5 %>
+            <input type="text" name="answer" placeholder="例: 東京都"
+              class="border border-gray-300 rounded-md px-4 py-3 w-64 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg">
+          <% elsif @current_question[:options] %>
+            <% @current_question[:options].each do |option| %>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <%= radio_button_tag :answer, option, false, class: "scale-125" %>
+                <span class="text-lg text-gray-800"><%= option %></span>
+              </label>
+            <% end %>
+          <% else %>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <%= radio_button_tag :answer, "yes", false, class: "scale-125" %>
+              <span class="text-lg text-gray-800">はい</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <%= radio_button_tag :answer, "no", false, class: "scale-125" %>
+              <span class="text-lg text-gray-800">いいえ</span>
+            </label>
+          <% end %>
+        </div>
+
+        <button name="button" type="submit"
+          class="block mx-auto bg-blue-500 text-white py-3 px-4 w-32 rounded-full shadow-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 ease-in-out text-lg font-semibold">
+          <%= @current_question[:id] == 5 ? "診断する" : "次へ" %>
+        </button>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-red-100 rounded shadow-md p-6 max-w-lg text-center">
+      <p class="text-gray-800">診断が正常に開始できませんでした。</p>
+    </div>
+  <% end %>
+</main>
+
+<%= render 'shared/footer' %>

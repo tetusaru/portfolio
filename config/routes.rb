@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   root "top#index"
 
-  resources :users, only: [:new, :create, :show] do
+  resources :users, only: [ :new, :create, :show ] do
     member do
       get :mypage
     end
   end
 
-  resources :diagnoses, only: [:create, :show]
-  resources :sauna_facilities, only: [:index, :show]
+  resources :diagnoses, only: [ :create, :show ]
+  resources :sauna_facilities, only: [ :index, :show ]
 
   get "/survey", to: "diagnoses#survey"
   post "/survey/answer", to: "diagnoses#answer"

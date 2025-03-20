@@ -36,12 +36,12 @@ class DiagnosesController < ApplicationController
   def create
     session[:answers][params[:question_id]] = params[:answer]
     Rails.logger.debug "最終的な受信した回答: #{session[:answers].inspect}"
-  
+
     # 入力チェック：全て空 or location未記入の場合は no_result を返す
-    if session[ :answers ].values.all?(&:blank?) || session[ :answers ]["7"].blank?
+    if session[:answers].values.all?(&:blank?) || session[:answers]["7"].blank?
       redirect_to diagnosis_path(id: 0, no_result: true) and return
     end
-  
+
     facilities = SaunaFacility.all
     facilities = facilities.where(temperature_level: session[:answers]["1"]) if session[:answers]["1"].present?
     facilities = facilities.where(outdoor_bath: true) if session[:answers]["2"] == "yes"
@@ -49,10 +49,10 @@ class DiagnosesController < ApplicationController
     facilities = facilities.where(facility_type: session[:answers]["4"]) if session[:answers]["4"].present?
     facilities = facilities.where("location LIKE ?", "%#{session[:answers]['5']}%") if session[:answers]["5"].present?
     facilities = facilities.where(atmosphere: session[:answers]["6"]) if session[:answers]["6"].present?
-  
+
     Rails.logger.debug "絞り込まれた施設: #{facilities.map(&:name).inspect}"
     @result = facilities.first
-  
+
     if @result
       redirect_to diagnosis_path(id: @result.id)
     else

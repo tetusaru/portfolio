@@ -2,8 +2,8 @@
 
 one:
   user: one
-  sauna_name: MyString
-  comment: MyText
+  sauna_name: Test Sauna
+  comment: Good sauna!
 
 two:
   user: two

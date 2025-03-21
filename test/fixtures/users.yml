@@ -8,10 +8,10 @@ one:
   name: "Test User"
   email: test@example.com
   crypted_password: <%= User.encrypt('password') %>
-  salt: <%= User.salt %>
+  salt: <%= SecureRandom.hex(8) %>
 
 two:
   name: "testuser2"
   email: test2@example.com
   crypted_password: <%= User.encrypt('password') %>
-  salt: <%= User.salt %>
+  salt: <%= SecureRandom.hex(8) %>

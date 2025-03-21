@@ -3,7 +3,7 @@
 one:
   user: one
   sauna_name: "テストサウナ"
-  comment: "これはテスト用のコメントです"
+  comment: "テストコメント"
 
 two:
   user: two

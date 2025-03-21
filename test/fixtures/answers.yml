@@ -4,8 +4,10 @@ one:
   user: one
   question: one
   answer_value: MyString
+  diagnosis: one
 
 two:
   user: two
   question: two
   answer_value: MyString
+  diagnosis: two

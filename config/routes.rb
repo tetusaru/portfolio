@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :diagnoses, only: [ :create, :show ]
   resources :sauna_facilities, only: [ :index, :show ]
-  resources :mysaunas, only: [ :new, :create, :edit, :update, :destroy ]
+  resources :mysauna, only: [ :new, :create, :edit, :update, :destroy ]
 
   get "/survey", to: "diagnoses#survey"
   post "/survey/answer", to: "diagnoses#answer"

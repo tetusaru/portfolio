@@ -6,10 +6,10 @@
 #
 one:
   name: "Test User"
-  email: test@example.com 
-  crypted_password: <%= User.encrypt('password') %>
+  email: test@example.com
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt('password') %>
 
 two:
   name: "testuser2"
   email: test2@example.com
-  crypted_password: <%= User.encrypt('password') %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt('password') %>

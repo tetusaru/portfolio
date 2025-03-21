@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "mysaunas/new"
+  get "mysaunas/create"
+  get "mysaunas/edit"
+  get "mysaunas/update"
+  get "mysaunas/destroy"
   root "top#index"
 
   resources :users, only: [ :new, :create, :show ] do
@@ -9,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :diagnoses, only: [ :create, :show ]
   resources :sauna_facilities, only: [ :index, :show ]
+  resources :mysaunas, only: [ :new, :create, :edit, :update, :destroy ]
 
   get "/survey", to: "diagnoses#survey"
   post "/survey/answer", to: "diagnoses#answer"

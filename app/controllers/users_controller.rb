@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   def mypage
     @user = current_user
+    @mysauna = @user.mysauna
   end
 
   private

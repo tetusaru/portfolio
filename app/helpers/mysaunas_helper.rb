@@ -1,0 +1,2 @@
+module MysaunasHelper
+end

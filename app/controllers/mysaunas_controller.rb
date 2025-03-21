@@ -44,6 +44,9 @@ class MysaunasController < ApplicationController
 
   def set_mysauna
     @mysauna = current_user.mysauna
+    if @mysauna.nil? || @mysauna.id.to_s != params[:id]
+      redirect_to root_path, alert: "不正なアクセスです" and return
+    end
   end
 
   def mysauna_params

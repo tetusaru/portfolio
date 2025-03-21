@@ -21,12 +21,12 @@ class MysaunasControllerTest < ActionDispatch::IntegrationTest
     get edit_mysauna_url(@mysauna.id)
     assert_response :success
   end
-  
+
   test "should update mysauna" do
     patch mysauna_url(@mysauna.id), params: { mysauna: { sauna_name: "Updated Sauna" } }
     assert_response :redirect
   end
-  
+
   test "should destroy mysauna" do
     delete mysauna_url(@mysauna.id)
     assert_response :redirect

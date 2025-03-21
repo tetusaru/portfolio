@@ -1,5 +1,5 @@
 class MysaunasController < ApplicationController
-  before_action :set_mysauna, only: [:edit, :update, :destroy]
+  before_action :set_mysauna, only: [ :edit, :update, :destroy ]
   before_action :require_login
 
   def new

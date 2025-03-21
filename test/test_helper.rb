@@ -11,9 +11,9 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
-    def log_in_as(user)
-      post login_path, params: { session: { email: user.email, password: "password" } }
-      follow_redirect!
+    def log_in_as(user, password: 'password')
+      post login_path, params: { session: { email: user.email, password: password } }, headers: { 'HTTP_REFERER' => '/' }
+      follow_redirect! if response.redirect?
     end
   end
 end

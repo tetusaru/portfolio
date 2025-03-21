@@ -7,11 +7,11 @@
 one:
   name: "Test User"
   email: test@example.com
-  salt: ""
-  crypted_password: <%= User.encrypt('password') %>
+  salt: <%= Sorcery::CryptoProviders::BCrypt.salt %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt('password', salt: Sorcery::CryptoProviders::BCrypt.salt) %>
 
 two:
   name: "testuser2"
   email: test2@example.com
-  salt: ""
-  crypted_password: <%= User.encrypt('password') %>
+  salt: <%= Sorcery::CryptoProviders::BCrypt.salt %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt('password', salt: Sorcery::CryptoProviders::BCrypt.salt) %>

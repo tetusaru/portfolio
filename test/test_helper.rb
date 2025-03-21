@@ -13,6 +13,7 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
     def log_in_as(user)
       post login_path, params: { session: { email: user.email, password: "password" } }
+      follow_redirect! # ← ログイン後のリダイレクトに追従
     end
   end
 end

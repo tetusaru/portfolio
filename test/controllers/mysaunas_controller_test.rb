@@ -3,7 +3,7 @@ require "test_helper"
 class MysaunasControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one) # users.yml の one ユーザーをセット
-    log_in_as(@user)    # ヘルパーでログイン（無い場合は追加する）
+    post login_path, params: { session: { email: @user.email, password: 'password' } }
     @mysauna = @user.mysauna # fixtureで紐づけたmysaunaを取得
   end
 

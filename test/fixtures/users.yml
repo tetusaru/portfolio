@@ -5,9 +5,13 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: user@example.com
-  password_digest: <%= User.digest('password') %>
+  name: testuser
+  email: test@example.com
+  crypted_password: <%= User.digest('password') %>
+  salt: ""
 
 two:
-  name: User Two
-  email: user2@example.com
+  name: testuser2
+  email: test2@example.com
+  crypted_password: <%= User.digest('password') %>
+  salt: ""

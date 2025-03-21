@@ -2,8 +2,8 @@
 
 one:
   user: one
-  sauna_name: Test Sauna
-  comment: Good sauna!
+  sauna_name: "テストサウナ"
+  comment: "これはテスト用のコメントです"
 
 two:
   user: two

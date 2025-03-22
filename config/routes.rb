@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :mysaunas, only: [:new, :create, :edit, :update, :destroy, :show] do
+  resources :mysaunas, only: [ :new, :create, :edit, :update, :destroy, :show ] do
     member do
       get :share, to: "mysaunas#show_share" # OGP用
     end

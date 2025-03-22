@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @mysauna.sauna_name %> | Mysauna</title>
+    <meta name="description" content="<%= @mysauna.comment %>">
+    <meta property="og:title" content="<%= @mysauna.sauna_name %> | Mysauna">
+    <meta property="og:description" content="<%= @mysauna.comment %>">
+    <meta property="og:image" content="<%= url_for(@mysauna.image) if @mysauna.image.attached? %>">
+    <meta property="og:url" content="<%= mysauna_share_url(@mysauna) %>">
+    <meta property="og:type" content="article">
+  </head>
+  <body>
+    <!-- SNSシェア用なので中身は空でもOK -->
+  </body>
+</html>

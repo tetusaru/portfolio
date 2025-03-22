@@ -40,6 +40,11 @@ class MysaunasController < ApplicationController
     redirect_to mypage_user_path(current_user)
   end
 
+  def show_share
+    @mysauna = Mysauna.find(params[:id])
+    render layout: "ogp"
+  end
+
   private
 
   def set_mysauna

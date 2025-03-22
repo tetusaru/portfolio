@@ -9,12 +9,18 @@ Rails.application.routes.draw do
   resources :users, only: [ :new, :create, :show ] do
     member do
       get :mypage
+      get :share
+    end
+  end
+
+  resources :mysaunas, only: [:new, :create, :edit, :update, :destroy, :show] do
+    member do
+      get :share, to: "mysaunas#show_share" # OGP用
     end
   end
 
   resources :diagnoses, only: [ :create, :show ]
   resources :sauna_facilities, only: [ :index, :show ]
-  resources :mysaunas, only: [ :new, :create, :edit, :update, :destroy ]
 
   get "/survey", to: "diagnoses#survey"
   post "/survey/answer", to: "diagnoses#answer"

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @mysauna = @user.mysauna
     if @mysauna.present?
       @ogp_image = @mysauna.image
-      render layout: 'ogp'
+      render layout: "ogp"
     else
       redirect_to mypage_user_path(@user), alert: "Mysaunaが登録されていません。"
     end

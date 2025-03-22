@@ -1,10 +1,10 @@
 require "test_helper"
 
 class MysaunasControllerTest < ActionDispatch::IntegrationTest
-  setup do
+  def setup
     @user = users(:one)
+    @user.mysauna&.destroy
     log_in_as(@user)
-    @mysauna = @user.mysauna
   end
 
   test "should get new" do

@@ -9,8 +9,36 @@
     <meta property="og:image" content="<%= rails_blob_url(@ogp_image, disposition: "inline", only_path: false) %>" />
     <meta property="og:url" content="<%= mysauna_share_url(@mysauna) %>">
     <meta property="og:type" content="article">
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: sans-serif;
+        background: #f9f9f9;
+      }
+      .share-box {
+        text-align: center;
+      }
+      .share-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #1da1f2;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <!-- SNSシェア用なので中身は空でもOK -->
+    <div class="share-box">
+      <h1>「<%= @mysauna.sauna_name %>」をXでシェアしよう！</h1>
+      <p><%= @mysauna.comment %></p>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?text=<%= URI.encode(@mysauna.sauna_name + 'に行ってきました！ ' + @mysauna.comment) %>&url=<%= mysauna_share_url(@mysauna) %>&hashtags=Mysauna" target="_blank" rel="noopener">
+        Xでシェアする
+      </a>
+    </div>
   </body>
 </html>

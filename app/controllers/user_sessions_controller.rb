@@ -5,6 +5,7 @@ class UserSessionsController < ApplicationController
 
   def create
     @user = login(params[:email], params[:password])
+    puts "login result @user = #{@user.inspect}"
 
     if @user
       redirect_to root_path, notice: "ログインされました！"

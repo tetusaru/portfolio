@@ -1,9 +1,45 @@
 <%= render 'shared/header' %>
 
 <div class="container mx-auto my-8">
+
+  <% flash.each do |type, message| %>
+    <% bg_color = case type.to_sym
+      when :notice then "bg-green-100 text-green-800 border-green-300"
+      when :alert  then "bg-red-100 text-red-800 border-red-300"
+      else "bg-gray-100 text-gray-800 border-gray-300"
+    end %>
+    <div class="border-l-4 p-4 mb-4 <%= bg_color %>">
+      <p><%= message %></p>
+    </div>
+  <% end %>
+
   <h1 class="text-2xl font-bold mb-4">マイページ</h1>
   <p>ようこそ、<%= @user.name %> さん</p>
   <p>メールアドレス: <%= @user.email %></p>
+
+  <% if @mysauna.present? %>
+    <div class="mt-6 p-4 border rounded bg-gray-100">
+      <h2 class="text-xl font-semibold mb-2">Mysauna</h2>
+
+      <% if @mysauna.image.attached? %>
+        <%= image_tag @mysauna.image.variant(resize_to_limit: [300, 300]), class: "rounded shadow mb-4 block" %>
+      <% else %>
+        <p>画像はまだ登録されていません</p>
+      <% end %>
+
+      <p><strong>施設名:</strong> <%= @mysauna.sauna_name %></p>
+      <p><strong>コメント:</strong> <%= @mysauna.comment %></p>
+
+      <div class="mt-6 space-x-2">
+        <%= link_to "My saunaを編集する", edit_mysauna_path(@mysauna), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block" %>
+        <%= link_to "投稿", "#", class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-block" %>
+        <%= link_to "SNSでシェア", "#", class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block" %>
+      </div>
+    </div>
+  <% else %>
+    <p class="mt-4">まだMysaunaは登録されていません。</p>
+    <%= link_to "Mysaunaを登録する", new_mysauna_path, class: "bg-blue-500 text-white py-2 px-4 rounded mt-2 inline-block" %>
+  <% end %>
 </div>
 
 <%= render 'shared/footer' %>

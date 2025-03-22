@@ -2,12 +2,10 @@
 
 one:
   user: one
-  question: one
-  answer_value: MyString
-  diagnosis: one
+  sauna_name: "テストサウナ"
+  comment: "テストコメント"
 
 two:
   user: two
-  question: two
-  answer_value: MyString
-  diagnosis: two
+  sauna_name: MyString
+  comment: MyText

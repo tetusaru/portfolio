@@ -11,5 +11,10 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def log_in_as(user, password: "password")
+      post login_path, params: { email: user.email, password: password }
+      puts "session[:user_id] after login = #{session[:user_id].inspect}"
+      follow_redirect! if response.redirect?
+    end
   end
 end

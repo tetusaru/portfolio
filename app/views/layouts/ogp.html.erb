@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <title><%= @mysauna.sauna_name %> | Mysauna</title>
     <meta name="description" content="<%= @mysauna.comment %>">
+    <!-- OGP メタタグ -->
     <meta property="og:title" content="<%= @mysauna.sauna_name %> | Mysauna">
     <meta property="og:description" content="<%= @mysauna.comment %>">
-    <meta property="og:image" content="<%= rails_blob_url(@ogp_image, disposition: "inline", only_path: false) %>" />
+    <meta property="og:image" content="<%= rails_blob_url(@ogp_image, disposition: "inline", only_path: false) %>">
     <meta property="og:url" content="<%= share_mysauna_url(@mysauna) %>">
     <meta property="og:type" content="article">
+
+    <!-- Twitter Card メタタグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= @mysauna.sauna_name %> | Mysauna">
+    <meta name="twitter:description" content="<%= @mysauna.comment %>">
+    <meta name="twitter:image" content="<%= rails_blob_url(@ogp_image, disposition: "inline", only_path: false) %>">
+
     <style>
       body {
         display: flex;
@@ -37,7 +45,7 @@
       <h1>「<%= @mysauna.sauna_name %>」をXでシェアしよう！</h1>
       <p><%= @mysauna.comment %></p>
       <a class="share-btn" href="https://twitter.com/intent/tweet?text=<%= ERB::Util.url_encode(@mysauna.sauna_name + 'に行ってきました！ ' + @mysauna.comment) %>&url=<%= share_mysauna_url(@mysauna) %>&hashtags=Mysauna" target="_blank" rel="noopener">
-        Xシェアする
+        Xでシェアする
       </a>
     </div>
   </body>

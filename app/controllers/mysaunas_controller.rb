@@ -42,6 +42,7 @@ class MysaunasController < ApplicationController
 
   def show_share
     @mysauna = Mysauna.find(params[:id])
+    @ogp_image = @mysauna.image
     render layout: "ogp"
   end
 

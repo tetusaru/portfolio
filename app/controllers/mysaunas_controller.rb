@@ -1,6 +1,6 @@
 class MysaunasController < ApplicationController
   before_action :set_mysauna, only: [ :edit, :update, :destroy ]
-  before_action :require_login
+  before_action :require_login, except: [ :show_share ]
 
   def new
     # ユーザーがすでにMysaunaを登録していれば編集画面にリダイレクト

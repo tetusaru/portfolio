@@ -37,7 +37,7 @@
       <h1>「<%= @mysauna.sauna_name %>」をXでシェアしよう！</h1>
       <p><%= @mysauna.comment %></p>
       <a class="share-btn" href="https://twitter.com/intent/tweet?text=<%= ERB::Util.url_encode(@mysauna.sauna_name + 'に行ってきました！ ' + @mysauna.comment) %>&url=<%= share_mysauna_url(@mysauna) %>&hashtags=Mysauna" target="_blank" rel="noopener">
-        Xでシェアする
+        Xシェアする
       </a>
     </div>
   </body>

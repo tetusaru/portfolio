@@ -16,17 +16,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def share
-    @user = User.find(params[:id])
-    @mysauna = @user.mysauna
-    if @mysauna.present?
-      @ogp_image = @mysauna.image
-      render layout: "ogp", inline: "" # ここで view を空にして ogp レイアウトだけを返す
-    else
-      redirect_to mypage_user_path(@user), alert: "Mysaunaが登録されていません。"
-    end
-  end
-
   def mypage
     @user = current_user
     @mysauna = @user.mysauna

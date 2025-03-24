@@ -7,7 +7,7 @@
     <meta property="og:title" content="<%= @mysauna.sauna_name %> | Mysauna">
     <meta property="og:description" content="<%= @mysauna.comment %>">
     <meta property="og:image" content="<%= rails_blob_url(@ogp_image, disposition: "inline", only_path: false) %>" />
-    <meta property="og:url" content="<%= mysauna_share_url(@mysauna) %>">
+    <meta property="og:url" content="<%= share_mysauna_url(@mysauna) %>">
     <meta property="og:type" content="article">
     <style>
       body {
@@ -36,7 +36,7 @@
     <div class="share-box">
       <h1>「<%= @mysauna.sauna_name %>」をXでシェアしよう！</h1>
       <p><%= @mysauna.comment %></p>
-      <a class="share-btn" href="https://twitter.com/intent/tweet?text=<%= URI.encode(@mysauna.sauna_name + 'に行ってきました！ ' + @mysauna.comment) %>&url=<%= mysauna_share_url(@mysauna) %>&hashtags=Mysauna" target="_blank" rel="noopener">
+      <a class="share-btn" href="https://twitter.com/intent/tweet?text=<%= URI.encode(@mysauna.sauna_name + 'に行ってきました！ ' + @mysauna.comment) %>&url=<%= share_mysauna_url(@mysauna) %>&hashtags=Mysauna" target="_blank" rel="noopener">
         Xでシェアする
       </a>
     </div>

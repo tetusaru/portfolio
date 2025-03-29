@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_login
-  before_action :set_post, only: [:destroy]
-  before_action :authorize_post_deletion, only: [:destroy]
+  before_action :set_post, only: [ :destroy ]
+  before_action :authorize_post_deletion, only: [ :destroy ]
 
   def create
     mysauna = current_user.mysauna

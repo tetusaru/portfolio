@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_113737) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_29_010826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -86,7 +86,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_113737) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_posted_at"
     t.index ["user_id"], name: "index_mysaunas_on_user_id", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "mysauna_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sauna_name"
+    t.text "comment"
+    t.index ["mysauna_id"], name: "index_posts_on_mysauna_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -131,4 +143,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_113737) do
   add_foreign_key "diagnosis_recommendations", "sauna_facilities"
   add_foreign_key "diagnosis_results", "diagnoses"
   add_foreign_key "mysaunas", "users"
+  add_foreign_key "posts", "mysaunas"
+  add_foreign_key "posts", "users"
 end

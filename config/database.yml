@@ -29,19 +29,23 @@ production:
   password: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s
   host: dpg-ctgf2iilqhvc739jldqg-a.singapore-postgres.render.com
   port: 5432
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %> 
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 10) %>
+
+# ↓ Solid Queue 用の接続（本番では production と同じ DB を使う）
+queue:
+  <<: *default
+  database: mysauna_db
+  username: mysauna_db_user
+  password: Wctx4PRip21ECfGbW3sgUR9fas7YFl5s
+  host: dpg-ctgf2iilqhvc739jldqg-a.singapore-postgres.render.com
+  port: 5432
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
 
 cable:
   <<: *default
   database: <%= ENV.fetch("CABLE_DATABASE_NAME", "mysauna_cable") %>
   username: <%= ENV.fetch("CABLE_DATABASE_USER", "cable_user") %> 
   password: <%= ENV.fetch("CABLE_DATABASE_PASSWORD", nil) %>
-
-queue:
-  <<: *default
-  database: <%= ENV.fetch("QUEUE_DATABASE_NAME", "mysauna_queue") %>
-  username: <%= ENV.fetch("QUEUE_DATABASE_USER", "queue_user") %>
-  password: <%= ENV.fetch("QUEUE_DATABASE_PASSWORD", nil) %>
 
 cache:
   <<: *default

@@ -30,9 +30,14 @@
       <p><strong>施設名:</strong> <%= @mysauna.sauna_name %></p>
       <p><strong>コメント:</strong> <%= @mysauna.comment %></p>
 
-      <div class="mt-6 space-x-2">
+      <div class="mt-6 flex flex-wrap items-center space-x-4">
         <%= link_to "My saunaを編集する", edit_mysauna_path(@mysauna), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block" %>
-        <%= link_to "投稿", "#", class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-block" %>
+
+        <%= tag.form method: :post, action: posts_path, class: "inline-block" do %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <%= submit_tag "投稿", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <% end %>
+
         <%= link_to "Xでシェア", share_mysauna_url(@mysauna), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block", target: "_blank", rel: "noopener" %>
       </div>
     </div>

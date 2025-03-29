@@ -1,0 +1,45 @@
+<%= render "shared/header" %>
+
+<div class="container mx-auto my-8">
+  <% flash.each do |type, message| %>
+    <% bg_color = case type.to_sym
+      when :notice then "bg-green-100 text-green-800 border-green-300"
+      when :alert  then "bg-red-100 text-red-800 border-red-300"
+      else "bg-gray-100 text-gray-800 border-gray-300"
+    end %>
+    <div class="border-l-4 p-4 mb-4 <%= bg_color %>">
+      <p><%= message %></p>
+    </div>
+  <% end %>
+
+  <h1 class="text-2xl font-bold mb-6">みんなのサウナ</h1>
+
+  <% @posts.each do |post| %>
+    <div class="mb-6 p-4 border rounded bg-gray-100">
+      <p class="font-semibold mb-2">ユーザー名：<%= post.user.name %></p>
+
+      <% if post.image.attached? %>
+        <%= image_tag post.image.variant(resize_to_limit: [300, 300]), class: "rounded shadow mb-4 block" %>
+      <% end %>
+
+      <p><strong>施設名:</strong> <%= post.sauna_name %></p>
+      <p><strong>コメント:</strong> <%= post.comment %></p>
+
+      <% if post.user == current_user %>
+        <div class="mt-4">
+          <form action="<%= post_path(post) %>" method="post" style="display:inline;">
+            <input type="hidden" name="_method" value="delete">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <button type="submit"
+              onclick="return confirm('本当に削除しますか？');"
+              style="background-color: red; color: white; padding: 10px 20px; border-radius: 9999px; font-weight: bold;">
+              削除
+            </button>
+          </form>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "shared/footer" %>

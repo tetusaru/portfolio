@@ -1,2 +1,7 @@
 production:
-  database_url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+
+queue:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>

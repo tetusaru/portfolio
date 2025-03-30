@@ -16,7 +16,7 @@ class CreateSolidQueueTables < ActiveRecord::Migration[8.0]
     add_index :solid_queue_jobs, :active_job_id
     add_index :solid_queue_jobs, :class_name
     add_index :solid_queue_jobs, :finished_at
-    add_index :solid_queue_jobs, [:queue_name, :finished_at], name: "index_solid_queue_jobs_for_filtering"
-    add_index :solid_queue_jobs, [:scheduled_at, :finished_at], name: "index_solid_queue_jobs_for_alerting"
+    add_index :solid_queue_jobs, [ :queue_name, :finished_at ], name: "index_solid_queue_jobs_for_filtering"
+    add_index :solid_queue_jobs, [ :scheduled_at, :finished_at ], name: "index_solid_queue_jobs_for_alerting"
   end
 end

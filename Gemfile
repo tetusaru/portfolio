@@ -12,10 +12,10 @@ gem "jbuilder"
 
 gem "aws-sdk-s3", require: false
 
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+# gem 'tzinfo-data', platforms: %i[ windows jruby ]
 
 gem "solid_cache"
-gem "solid_queue"
+gem "solid_queue", "1.1.4"
 gem "solid_cable", "~> 3.0.5"
 
 gem "bootsnap", require: false

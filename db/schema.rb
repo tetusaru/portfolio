@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_05_120000) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_05_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -132,6 +132,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_05_120000) do
     t.index ["thread_id"], name: "index_solid_queue_assignments_on_thread_id"
   end
 
+  create_table "solid_queue_completed_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_solid_queue_completed_executions_on_job_id"
+  end
+
+  create_table "solid_queue_failed_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.text "error"
+    t.datetime "failed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_solid_queue_failed_executions_on_job_id"
+  end
+
   create_table "solid_queue_jobs", force: :cascade do |t|
     t.string "queue_name", null: false
     t.string "job_class", null: false
@@ -146,6 +163,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_05_120000) do
     t.string "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_ready_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_solid_queue_ready_executions_on_job_id"
   end
 
   create_table "solid_queue_threads", force: :cascade do |t|
@@ -180,5 +204,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_05_120000) do
   add_foreign_key "posts", "users"
   add_foreign_key "solid_queue_assignments", "solid_queue_jobs", column: "job_id"
   add_foreign_key "solid_queue_assignments", "solid_queue_threads", column: "thread_id"
+  add_foreign_key "solid_queue_completed_executions", "solid_queue_jobs", column: "job_id"
+  add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id"
+  add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id"
   add_foreign_key "solid_queue_threads", "solid_queue_processes", column: "process_id"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_29_233124) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_05_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -123,22 +123,37 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_29_233124) do
     t.string "atmosphere"
   end
 
-  create_table "solid_queue_jobs", force: :cascade do |t|
-    t.string "queue_name", null: false
-    t.string "class_name", null: false
-    t.text "arguments"
-    t.integer "priority", default: 0, null: false
-    t.string "active_job_id"
-    t.datetime "scheduled_at"
-    t.datetime "finished_at"
-    t.string "concurrency_key"
+  create_table "solid_queue_assignments", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "thread_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["active_job_id"], name: "index_solid_queue_jobs_on_active_job_id"
-    t.index ["class_name"], name: "index_solid_queue_jobs_on_class_name"
-    t.index ["finished_at"], name: "index_solid_queue_jobs_on_finished_at"
-    t.index ["queue_name", "finished_at"], name: "index_solid_queue_jobs_for_filtering"
-    t.index ["scheduled_at", "finished_at"], name: "index_solid_queue_jobs_for_alerting"
+    t.index ["job_id"], name: "index_solid_queue_assignments_on_job_id"
+    t.index ["thread_id"], name: "index_solid_queue_assignments_on_thread_id"
+  end
+
+  create_table "solid_queue_jobs", force: :cascade do |t|
+    t.string "queue_name", null: false
+    t.string "job_class", null: false
+    t.datetime "scheduled_at"
+    t.jsonb "arguments", default: []
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_processes", force: :cascade do |t|
+    t.string "name"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_threads", force: :cascade do |t|
+    t.bigint "process_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["process_id"], name: "index_solid_queue_threads_on_process_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -163,4 +178,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_29_233124) do
   add_foreign_key "mysaunas", "users"
   add_foreign_key "posts", "mysaunas"
   add_foreign_key "posts", "users"
+  add_foreign_key "solid_queue_assignments", "solid_queue_jobs", column: "job_id"
+  add_foreign_key "solid_queue_assignments", "solid_queue_threads", column: "thread_id"
+  add_foreign_key "solid_queue_threads", "solid_queue_processes", column: "process_id"
 end

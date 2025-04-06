@@ -126,29 +126,20 @@ class CreateAllSolidQueueTables < ActiveRecord::Migration[7.1]
       t.index :key, unique: true
     end
 
-    # 外部キー制約（テーブルとカラムが存在する場合のみ追加）
-    if table_exists?(:solid_queue_blocked_executions) && column_exists?(:solid_queue_blocked_executions, :job_id)
-      add_foreign_key :solid_queue_blocked_executions, :solid_queue_jobs, column: :job_id, on_delete: :cascade
-    end
-
-    if table_exists?(:solid_queue_claimed_executions) && column_exists?(:solid_queue_claimed_executions, :job_id)
-      add_foreign_key :solid_queue_claimed_executions, :solid_queue_jobs, column: :job_id, on_delete: :cascade
-    end
-
-    if table_exists?(:solid_queue_failed_executions) && column_exists?(:solid_queue_failed_executions, :job_id)
-      add_foreign_key :solid_queue_failed_executions, :solid_queue_jobs, column: :job_id, on_delete: :cascade
-    end
-
-    if table_exists?(:solid_queue_ready_executions) && column_exists?(:solid_queue_ready_executions, :job_id)
-      add_foreign_key :solid_queue_ready_executions, :solid_queue_jobs, column: :job_id, on_delete: :cascade
-    end
-
-    if table_exists?(:solid_queue_recurring_executions) && column_exists?(:solid_queue_recurring_executions, :job_id)
-      add_foreign_key :solid_queue_recurring_executions, :solid_queue_jobs, column: :job_id, on_delete: :cascade
-    end
-
-    if table_exists?(:solid_queue_scheduled_executions) && column_exists?(:solid_queue_scheduled_executions, :job_id)
-      add_foreign_key :solid_queue_scheduled_executions, :solid_queue_jobs, column: :job_id, on_delete: :cascade
+    # 外部キー制約（重複チェックを追加済み）
+    [
+      :solid_queue_blocked_executions,
+      :solid_queue_claimed_executions,
+      :solid_queue_failed_executions,
+      :solid_queue_ready_executions,
+      :solid_queue_recurring_executions,
+      :solid_queue_scheduled_executions
+    ].each do |table|
+      if table_exists?(table) &&
+         column_exists?(table, :job_id) &&
+         !foreign_key_exists?(table, :solid_queue_jobs, column: :job_id)
+        add_foreign_key table, :solid_queue_jobs, column: :job_id, on_delete: :cascade
+      end
     end
   end
 end

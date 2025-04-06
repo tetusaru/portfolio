@@ -37,7 +37,7 @@ class CreateAllSolidQueueTables < ActiveRecord::Migration[7.1]
       t.datetime :created_at, null: false
 
       t.index :job_id, unique: true
-      t.index [:process_id, :job_id]
+      t.index [ :process_id, :job_id ]
     end
 
     create_table :solid_queue_failed_executions, if_not_exists: true do |t|

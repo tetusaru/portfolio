@@ -3,7 +3,7 @@ class AddStartedAtToSolidQueueProcesses < ActiveRecord::Migration[7.1]
     unless column_exists?(:solid_queue_processes, :started_at)
       execute <<~SQL
         ALTER TABLE solid_queue_processes
-        ADD COLUMN started_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+        ADD COLUMN started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
       SQL
     end
   end

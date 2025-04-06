@@ -3,4 +3,3 @@ class ChangeStartedAtNullableInSolidQueueProcesses < ActiveRecord::Migration[7.1
     change_column_null :solid_queue_processes, :started_at, true
   end
 end
-

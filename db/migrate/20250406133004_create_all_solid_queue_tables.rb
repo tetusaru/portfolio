@@ -81,6 +81,10 @@ class CreateAllSolidQueueTables < ActiveRecord::Migration[7.1]
       t.index [ :queue_name, :priority, :job_id ], name: "index_solid_queue_poll_by_queue"
     end
 
+    if table_exists?(:solid_queue_ready_executions) && !column_exists?(:solid_queue_ready_executions, :priority)
+        add_column :solid_queue_ready_executions, :priority, :integer, default: 0, null: false
+    end
+
     create_table :solid_queue_recurring_executions, if_not_exists: true do |t|
       t.bigint :job_id, null: false
       t.string :task_key, null: false

@@ -1,0 +1,29 @@
+<%= render "shared/header" %>
+
+<div class="container mx-auto my-8">
+  <h1 class="text-2xl font-bold mb-6">投稿の詳細</h1>
+
+  <div class="p-6 border rounded bg-gray-100">
+    <p class="font-semibold mb-2">ユーザー名：<%= @post.user.name %></p>
+
+    <% if @post.image.attached? %>
+      <%= image_tag @post.image.variant(resize_to_limit: [500, 500]), class: "rounded shadow mb-4 block" %>
+    <% end %>
+
+    <p><strong>施設名:</strong> <%= @post.sauna_name %></p>
+    <p><strong>コメント:</strong> <%= @post.comment %></p>
+
+    <% if @post.user == current_user %>
+      <div class="mt-4 flex space-x-4">
+        <%= link_to "編集", edit_mysauna_path(@post.mysauna), class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+        <%= button_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "bg-red-500 text-white px-4 py-2 rounded" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6">
+      <%= link_to "戻る", posts_path, class: "text-blue-600 hover:underline" %>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/footer" %>

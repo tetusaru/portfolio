@@ -4,7 +4,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    @user = User.find_by(email: params[ :user ][ :email ])
+    @user = User.find_by(email: params[:user][:email])
     if @user && @user.update(password_params)
       redirect_to login_path, notice: "パスワードを変更しました。ログインしてください。"
     else

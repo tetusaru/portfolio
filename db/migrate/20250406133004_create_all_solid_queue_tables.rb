@@ -70,14 +70,6 @@ class CreateAllSolidQueueTables < ActiveRecord::Migration[7.1]
       t.index :supervisor_id
     end
 
-    create_table :solid_queue_ready_executions, if_not_exists: true do |t|
-      t.bigint :job_id, null: false
-      t.string :queue_name, null: false
-      t.datetime :created_at, null: false
-
-      t.index :job_id, unique: true
-    end
-
     create_table :solid_queue_recurring_executions, if_not_exists: true do |t|
       t.bigint :job_id, null: false
       t.string :task_key, null: false

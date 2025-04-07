@@ -44,6 +44,10 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "投稿を削除しました"
   end
 
+  def show
+    @post = Post.includes(:user).find(params[:id])
+  end
+
   private
 
   def set_post

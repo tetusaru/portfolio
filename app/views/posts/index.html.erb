@@ -16,6 +16,7 @@
 
   <% @posts.each do |post| %>
     <div class="mb-6 p-4 border rounded bg-gray-100">
+    <%= link_to post_path(post), class: "block hover:opacity-80" do %>
       <p class="font-semibold mb-2">ユーザー名：<%= post.user.name %></p>
 
       <% if post.image.attached? %>
@@ -24,6 +25,7 @@
 
       <p><strong>施設名:</strong> <%= post.sauna_name %></p>
       <p><strong>コメント:</strong> <%= post.comment %></p>
+    <% end %>
 
       <% if post.user == current_user %>
         <div class="mt-4">

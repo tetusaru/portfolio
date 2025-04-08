@@ -25,10 +25,14 @@ gem "thruster", require: false
 gem "sorcery", "0.16.3"
 gem "image_processing", "~> 1.2"
 
+gem "omniauth"
+gem "omniauth-google-oauth2"
+
 group :development, :test do
   # gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"  ← 一時的にコメントアウト
   gem "brakeman", "~> 7.0.0"
   gem "rubocop-rails-omakase", require: false
+  gem "dotenv-rails"
 end
 
 group :development do

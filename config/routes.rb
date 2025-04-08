@@ -29,6 +29,9 @@ Rails.application.routes.draw do
 
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
+  get "/auth/:provider", to: "sessions#passthru", as: :auth_request
+  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/failure", to: "sessions#failure"
   delete "logout", to: "user_sessions#destroy"
   get "signup", to: "users#new", as: "signup"
   get "/maintenance", to: "pages#maintenance", as: "maintenance"

@@ -41,6 +41,14 @@
           </button>
         </div>
 
+        <!-- オートログインチェックボックス -->
+        <div class="mb-6">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="remember_me" value="1" class="form-checkbox text-blue-600">
+             <span class="ml-2 text-gray-700">次回から自動的にログインする</span>
+          </label>
+        </div>
+
         <!-- 新規登録リンク -->
         <div class="text-center text-gray-600">
           <%= link_to 'はじめての方はこちら', signup_path, class: 'text-blue-500 hover:underline' %>
@@ -48,7 +56,6 @@
       </form>
 
       <div class="text-center mt-4">
-        <p class="text-gray-500 mb-2">または</p>
         <%= link_to "Googleアカウントでログイン", "/auth/google_oauth2", class: 'text-blue-500 hover:underline' %>
       </div>
 

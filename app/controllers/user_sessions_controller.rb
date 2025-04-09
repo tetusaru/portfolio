@@ -4,9 +4,9 @@ class UserSessionsController < ApplicationController
   def new; end
 
   def create
-    @user = login(params[:email], params[:password])
+    @user = login(params[:email], params[:password], params[:remember_me] == "1")
     puts "login result @user = #{@user.inspect}"
-
+  
     if @user
       redirect_to root_path, notice: "ログインされました！"
     else

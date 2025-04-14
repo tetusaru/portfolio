@@ -1,13 +1,12 @@
-<header class="w-full bg-blue-500 text-white p-4 flex justify-between items-center">
-  <!-- Mysaunaをリンク化 -->
+<header class="bg-blue-500 text-white py-8 px-4 min-h-[80px] sm:py-12 sm:min-h-[100px] md:py-16 md:min-h-[120px] relative z-10">
   <a href="<%= root_path %>" class="text-xl font-bold">Mysauna</a>
   <nav class="space-x-4">
-  <% if logged_in? %>
-    <a href="<%= mypage_user_path(current_user) %>" class="hover:underline">マイページ</a>
-    <a href="<%= logout_path %>" data-method="delete" rel="nofollow" class="hover:underline">ログアウト</a>
-  <% else %>
-    <a href="<%= login_path %>" class="hover:underline">ログイン</a>
-    <a href="<%= signup_path %>" class="hover:underline">会員登録</a>
-  <% end %>
-</nav>
+    <% if logged_in? %>
+      <a href="<%= mypage_user_path(current_user) %>" class="hover:underline">マイページ</a>
+      <a href="<%= logout_path %>" data-method="delete" rel="nofollow" class="hover:underline">ログアウト</a>
+    <% else %>
+      <a href="<%= login_path %>" class="hover:underline">ログイン</a>
+      <a href="<%= signup_path %>" class="hover:underline">会員登録</a>
+    <% end %>
+  </nav>
 </header>

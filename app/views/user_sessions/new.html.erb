@@ -3,62 +3,45 @@
   <%= render 'shared/header' %>
 
   <% if flash[:notice] %>
-  <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
-    <p><%= flash[:notice] %></p>
-  </div>
- <% end %>
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 text-center">
+      <p><%= flash[:notice] %></p>
+    </div>
+  <% end %>
 
   <!-- ログインフォーム -->
   <main class="flex-1 flex items-center justify-center px-4">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-center text-2xl font-bold mb-6">ログイン</h2>
 
-      <!-- フォーム -->
-      <form action="#" method="post">
-        <!-- メールアドレス -->
+      <%= form_with url: login_path, local: true do |f| %>
         <div class="mb-4">
-          <label for="email" class="block text-gray-700 font-medium mb-2">メールアドレス</label>
-          <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <%= f.label :email, "メールアドレス", class: "block text-gray-700 font-medium mb-2" %>
+          <%= f.email_field :email, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
         </div>
 
-        <!-- パスワード -->
-        <div class="mb-6">
-          <label for="password" class="block text-gray-700 font-medium mb-2">パスワード</label>
-          <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <div class="mb-4">
+          <%= f.label :password, "パスワード", class: "block text-gray-700 font-medium mb-2" %>
+          <%= f.password_field :password, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
         </div>
 
-        <!-- パスワードを忘れた場合 -->
         <div class="mb-4 text-right">
-          <a href="<%= edit_password_reset_path %>" class="text-blue-500 text-sm hover:underline">
-            パスワードをお忘れの方はこちら
-          </a>
+          <%= link_to "パスワードをお忘れの方はこちら", edit_password_reset_path, class: "text-blue-500 text-sm hover:underline" %>
         </div>
 
-        <!-- ログインボタン -->
-        <div class="mb-6">
-          <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
-            ログイン
-          </button>
+        <div class="mb-4">
+          <%= f.submit "ログイン", class: "w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" %>
         </div>
 
-        <!-- オートログインチェックボックス -->
-        <div class="mb-6">
-          <label class="inline-flex items-center">
-            <input type="checkbox" name="remember_me" value="1" class="form-checkbox text-blue-600">
-             <span class="ml-2 text-gray-700">次回から自動的にログインする</span>
-          </label>
+        <div class="mb-4 flex items-center">
+        <%= f.check_box :remember_me, { class: "form-checkbox text-blue-600" }, '1', '0' %>
+          <span class="ml-2 text-gray-700">次回から自動的にログインする</span>
         </div>
 
-        <!-- 新規登録リンク -->
         <div class="text-center text-gray-600">
-          <%= link_to 'はじめての方はこちら', signup_path, class: 'text-blue-500 hover:underline' %>
+          <%= link_to 'はじめての方はこちら', signup_path, class: 'text-blue-500 hover:underline block mb-1' %>
+          <%= link_to 'Googleアカウントでログイン', "/auth/google_oauth2", class: 'text-blue-500 hover:underline' %>
         </div>
-      </form>
-
-      <div class="text-center mt-4">
-        <%= link_to "Googleアカウントでログイン", "/auth/google_oauth2", class: 'text-blue-500 hover:underline' %>
-      </div>
-
+      <% end %>
     </div>
   </main>
 

@@ -1,13 +1,13 @@
 <%= render 'shared/header' %>
 
 <main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-  <h1 class="text-2xl font-bold text-gray-800 mb-6">診断結果</h1>
+  <h1 class="text-xl md:text-3xl font-bold text-gray-800 mb-6">診断結果</h1>
 
   <% if @result %>
-    <div class="bg-white rounded shadow-md p-6 max-w-lg text-center">
-      <h2 class="text-xl font-bold text-gray-900"><%= @result.name %></h2>
-      <p class="text-gray-600 mt-2">場所: <%= @result.location %></p>
-      <a href="<%= sauna_facility_path(@result) %>" class="text-blue-500 hover:underline">
+    <div class="bg-white rounded shadow-md p-6 w-full max-w-md md:max-w-lg text-center">
+      <h2 class="text-lg md:text-xl font-bold text-gray-900 mb-2"><%= @result.name %></h2>
+      <p class="text-gray-600 mb-4">場所: <%= @result.location %></p>
+      <a href="<%= sauna_facility_path(@result) %>" class="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
         詳細を見る
       </a>
     </div>

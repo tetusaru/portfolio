@@ -1,16 +1,13 @@
 <%= render 'shared/header' %>
 
-<div class="container mx-auto my-8">
-
+<div class="container mx-auto px-4 my-8">
   <% flash.each do |type, message| %>
     <% bg_color = case type.to_sym
       when :notice then "bg-green-100 text-green-800 border-green-300"
       when :alert  then "bg-red-100 text-red-800 border-red-300"
       else "bg-gray-100 text-gray-800 border-gray-300"
     end %>
-    <div class="border-l-4 p-4 mb-4 <%= bg_color %>">
-      <p><%= message %></p>
-    </div>
+    <div class="border-l-4 p-4 mb-4 <%= bg_color %>"><p><%= message %></p></div>
   <% end %>
 
   <h1 class="text-2xl font-bold mb-4">マイページ</h1>
@@ -22,23 +19,29 @@
       <h2 class="text-xl font-semibold mb-2">Mysauna</h2>
 
       <% if @mysauna.image.attached? %>
-        <%= image_tag @mysauna.image.variant(resize_to_limit: [300, 300]), class: "rounded shadow mb-4 block" %>
+        <%= image_tag @mysauna.image.variant(resize_to_limit: [300, 300]), class: "rounded shadow mb-4 block max-w-full" %>
       <% else %>
         <p>画像はまだ登録されていません</p>
       <% end %>
 
       <p><strong>施設名:</strong> <%= @mysauna.sauna_name %></p>
       <p><strong>コメント:</strong> <%= @mysauna.comment %></p>
+      <div class="mt-6 flex flex-wrap items-center justify-start space-x-4">
+        <!-- ボタン① -->
+        <%= link_to "編集する", edit_mysauna_path(@mysauna),
+          class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm sm:text-base inline-block" %>
 
-      <div class="mt-6 flex flex-wrap items-center space-x-4">
-        <%= link_to "My saunaを編集する", edit_mysauna_path(@mysauna), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block" %>
-
+        <!-- ボタン② -->
         <%= tag.form method: :post, action: posts_path, class: "inline-block" do %>
           <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-          <%= submit_tag "投稿", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          <%= submit_tag "投稿",
+            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm sm:text-base" %>
         <% end %>
 
-        <%= link_to "Xでシェア", share_mysauna_url(@mysauna), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block", target: "_blank", rel: "noopener" %>
+        <!-- ボタン③ -->
+        <%= link_to "Xでシェア", share_mysauna_url(@mysauna),
+          class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm sm:text-base inline-block",
+          target: "_blank", rel: "noopener" %>
       </div>
     </div>
   <% else %>

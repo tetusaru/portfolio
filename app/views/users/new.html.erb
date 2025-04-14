@@ -1,34 +1,31 @@
-<div class="min-h-screen bg-gray-50 flex flex-col justify-between">
-  <!-- ヘッダー -->
+<div class="min-h-screen bg-gray-50 flex flex-col justify-between px-4">
   <%= render 'shared/header' %>
 
-  <!-- アカウント作成フォーム -->
-  <main class="flex-1 flex items-center justify-center px-4">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+  <main class="flex-1 flex items-center justify-center">
+    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-center text-2xl font-bold mb-6">アカウント作成</h2>
 
-      <!-- フォーム -->
       <%= form_with model: @user, url: users_path, method: :post, local: true do |f| %>
         <div class="mb-4">
           <%= f.label :name, "ユーザー名", class: "block text-gray-700 font-medium mb-2" %>
           <%= f.text_field :name, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
         </div>
-      
+
         <div class="mb-4">
           <%= f.label :email, "メールアドレス", class: "block text-gray-700 font-medium mb-2" %>
           <%= f.email_field :email, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
         </div>
-      
+
         <div class="mb-4">
           <%= f.label :password, "パスワード", class: "block text-gray-700 font-medium mb-2" %>
           <%= f.password_field :password, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
         </div>
-      
+
         <div class="mb-6">
           <%= f.label :password_confirmation, "パスワード（確認用）", class: "block text-gray-700 font-medium mb-2" %>
           <%= f.password_field :password_confirmation, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
         </div>
-      
+
         <div class="mb-6">
           <%= f.submit "アカウント作成", class: "w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" %>
         </div>
@@ -36,6 +33,5 @@
     </div>
   </main>
 
-  <!-- フッター -->
   <%= render 'shared/footer' %>
 </div>

@@ -1,29 +1,33 @@
-<%= form_with model: @mysauna, local: true do |f| %>
-  <div class="mb-4">
-    <%= f.label :sauna_name, "サウナ施設名" %><br>
-    <%= f.text_field :sauna_name, placeholder: "例: スパメッツァ", class: "border p-2 w-full" %>
-  </div>
+<div class="max-w-xl mx-auto px-4 py-8">
+  <%= form_with model: @mysauna, local: true do |f| %>
+    <div class="space-y-6">
+      <div>
+        <%= f.label :sauna_name, "サウナ施設名", class: "block font-medium text-gray-700 mb-1" %>
+        <%= f.text_field :sauna_name, placeholder: "例: スパメッツァ", class: "border p-2 w-full rounded" %>
+      </div>
 
-  <div class="mb-4">
-    <%= f.label :comment, "コメント" %><br>
-    <%= f.text_area :comment, placeholder: "ここにコメントを入力", class: "border p-2 w-full" %>
-  </div>
+      <div>
+        <%= f.label :comment, "コメント", class: "block font-medium text-gray-700 mb-1" %>
+        <%= f.text_area :comment, placeholder: "ここにコメントを入力", class: "border p-2 w-full rounded" %>
+      </div>
 
-  <div class="mb-4">
-    <%= f.label :image, "サウナ画像" %><br>
-    <%= f.file_field :image, class: "border p-2 w-full" %>
-    <% if @mysauna.image.attached? %>
-      <p>現在の画像:</p>
-      <%= image_tag @mysauna.image.variant(resize_to_limit: [300, 300]), class: "mt-2 max-w-sm rounded" %>
-    <% end %>
-  </div>
+      <div>
+        <%= f.label :image, "サウナ画像", class: "block font-medium text-gray-700 mb-1" %>
+        <%= f.file_field :image, class: "border p-2 w-full rounded" %>
+        <% if @mysauna.image.attached? %>
+          <p class="mt-2">現在の画像:</p>
+          <%= image_tag @mysauna.image.variant(resize_to_limit: [300, 300]), class: "mt-2 max-w-full rounded" %>
+        <% end %>
+      </div>
 
-  <div class="flex space-x-4">
-    <%= f.submit @mysauna.persisted? ? "更新" : "登録", class: "bg-blue-500 text-white py-2 px-4 rounded" %>
-
-    <%# 編集画面のみ削除ボタン表示 %>
-    <% if @mysauna.persisted? %>
-      <%= button_to "削除", mysauna_path(@mysauna), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "bg-red-500 text-white py-2 px-4 rounded" %>
-    <% end %>
-  </div>
-<% end %>
+      <!-- ボタン部分 -->
+      <div class="flex flex-wrap sm:flex-nowrap gap-4 justify-start">
+        <%= f.submit @mysauna.persisted? ? "更新" : "登録", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <% if @mysauna.persisted? %>
+          <%= button_to "削除", mysauna_path(@mysauna), method: :delete, data: { confirm: "本当に削除しますか？" },
+              class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

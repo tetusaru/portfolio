@@ -1,6 +1,6 @@
 <%= render "shared/header" %>
 
-<div class="container mx-auto my-8">
+<div class="container mx-auto px-4 my-8">
   <% flash.each do |type, message| %>
     <% bg_color = case type.to_sym
       when :notice then "bg-green-100 text-green-800 border-green-300"
@@ -15,29 +15,25 @@
   <h1 class="text-2xl font-bold mb-6">みんなのサウナ</h1>
 
   <% @posts.each do |post| %>
-    <div class="mb-6 p-4 border rounded bg-gray-100">
-    <%= link_to post_path(post), class: "block hover:opacity-80" do %>
-      <p class="font-semibold mb-2">ユーザー名：<%= post.user.name %></p>
+    <div class="mb-6 p-4 border rounded bg-gray-100 max-w-2xl mx-auto">
+      <%= link_to post_path(post), class: "block hover:opacity-80" do %>
+        <p class="font-semibold mb-2">ユーザー名：<%= post.user.name %></p>
 
-      <% if post.image.attached? %>
-        <%= image_tag post.image.variant(resize_to_limit: [300, 300]), class: "rounded shadow mb-4 block" %>
+        <% if post.image.attached? %>
+          <%= image_tag post.image.variant(resize_to_limit: [300, 300]), class: "rounded shadow mb-4 block max-w-full h-auto" %>
+        <% end %>
+
+        <p><strong>施設名:</strong> <%= post.sauna_name %></p>
+        <p><strong>コメント:</strong> <%= post.comment %></p>
       <% end %>
-
-      <p><strong>施設名:</strong> <%= post.sauna_name %></p>
-      <p><strong>コメント:</strong> <%= post.comment %></p>
-    <% end %>
 
       <% if post.user == current_user %>
         <div class="mt-4">
-          <form action="<%= post_path(post) %>" method="post" style="display:inline;">
-            <input type="hidden" name="_method" value="delete">
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <button type="submit"
-              onclick="return confirm('本当に削除しますか？');"
-              style="background-color: red; color: white; padding: 10px 20px; border-radius: 9999px; font-weight: bold;">
-              削除
-            </button>
-          </form>
+          <button type="submit"
+            onclick="return confirm('本当に削除しますか？');"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            削除
+          </button>
         </div>
       <% end %>
     </div>

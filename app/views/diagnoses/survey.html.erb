@@ -6,8 +6,10 @@
   </h1>
 
   <% if @current_question %>
-  <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-lg mx-auto border border-gray-200 flex flex-col items-center space-y-6 transition-all duration-300 ease-in-out">
-      <h2 class="text-lg md:text-xl font-semibold text-gray-700 text-center"><%= @current_question[:text] %></h2>
+    <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-lg mx-auto border border-gray-200 flex flex-col items-center space-y-6 transition-all duration-300 ease-in-out">
+      <h2 class="text-lg md:text-xl font-semibold text-gray-700 text-center">
+        <%= @current_question[:text] %>
+      </h2>
 
       <%= form_with url: (@current_question[:id] == 7 ? "/survey/finish" : "/survey/answer"), method: :post, local: true, class: "w-full flex flex-col items-center space-y-6" do |f| %>
         <%= hidden_field_tag :question_id, @current_question[:id] %>
@@ -18,7 +20,7 @@
               class="border border-gray-300 rounded-md px-4 py-3 w-full md:w-80 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg">
           <% else %>
             <% @current_question[:options].each do |option| %>
-              <label class="flex items-center gap-3 cursor-pointer w-full justify-center md:justify-start">
+              <label class="flex items-center gap-3 cursor-pointer w-full justify-center">
                 <%= radio_button_tag :answer, option, false, class: "scale-125" %>
                 <span class="text-lg text-gray-800"><%= option %></span>
               </label>

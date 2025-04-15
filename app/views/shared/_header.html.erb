@@ -1,6 +1,6 @@
-<header class="bg-blue-500 text-white py-8 px-4 min-h-[80px] sm:py-12 sm:min-h-[100px] md:py-16 md:min-h-[120px] relative z-10">
+<header class="bg-blue-500 text-white py-4 px-4 min-h-[60px] md:min-h-[80px] flex items-center justify-between">
   <a href="<%= root_path %>" class="text-xl font-bold">Mysauna</a>
-  <nav class="space-x-4">
+  <nav class="space-x-4 text-sm sm:text-base">
     <% if logged_in? %>
       <a href="<%= mypage_user_path(current_user) %>" class="hover:underline">マイページ</a>
       <a href="<%= logout_path %>" data-method="delete" rel="nofollow" class="hover:underline">ログアウト</a>

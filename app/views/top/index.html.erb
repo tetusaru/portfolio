@@ -10,15 +10,14 @@
   <h1 class="text-base md:text-lg text-gray-500 mt-10">自分好みのサウナを見つける</h1>
   <h2 class="text-4xl md:text-6xl font-bold text-black my-4">Mysauna</h2>
 
-  <!-- ボタン部分（スマホは縦並び、PCは横並び） -->
-  <div class="w-full max-w-md md:max-w-3xl mt-8 flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-    <a href="/survey" class="flex-1 bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">
+  <div class="w-full max-w-md mt-8 flex flex-col space-y-4">
+    <a href="/survey" class="bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">
       さっそく探す
     </a>
-    <a href="<%= new_mysauna_path %>" class="flex-1 bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">
+    <a href="<%= new_mysauna_path %>" class="bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">
       Mysaunaを登録
     </a>
-    <a href="<%= posts_path %>" class="flex-1 bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">  
+    <a href="<%= posts_path %>" class="bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">  
       みんなのサウナ
     </a>
   </div>

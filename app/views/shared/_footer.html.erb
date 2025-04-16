@@ -1,7 +1,7 @@
 <footer class="w-full bg-blue-500 text-white text-center px-4 py-4 md:py-6 mt-8 md:mt-12">
   <nav class="flex justify-center space-x-4 sm:space-x-8 md:space-x-16">
-    <a href="<%= maintenance_path %>" class="hover:underline">お問い合わせ</a>
-    <a href="<%= maintenance_path %>" class="hover:underline">プライバシーポリシー</a>
-    <a href="<%= maintenance_path %>" class="hover:underline">利用規約</a>
+    <%= link_to "お問い合わせ", contact_path, class: "hover:underline" %>
+    <%= link_to "プライバシーポリシー", privacy_policy_path, class: "hover:underline" %>
+    <%= link_to "利用規約", terms_of_service_path, class: "hover:underline" %>
   </nav>
 </footer>

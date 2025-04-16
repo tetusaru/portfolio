@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get "mysaunas/update"
   get "mysaunas/destroy"
   root "top#index"
+  get "/privacy", to: "pages#privacy", as: :privacy_policy
+  get "/terms", to: "pages#terms", as: :terms_of_service
+  get "/contact", to: "pages#contact", as: :contact
 
   resources :users, only: [ :new, :create, :show ] do
     member do

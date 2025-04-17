@@ -5,6 +5,16 @@
     サウナのお好みを教えて！
   </h1>
 
+  <% if @current_question[:id] == 6 %>
+    <div class="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded mb-4 w-full max-w-lg text-sm">
+      現在は<strong>女性でも男性専用の施設</strong>が出てしまう場合がございます！
+    </div>
+  <% elsif @current_question[:id] == 7 %>
+    <div class="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded mb-4 w-full max-w-lg text-sm">
+      現在は<strong>東京都、千葉県</strong>のみ診断可能となっております！
+    </div>
+  <% end %>
+
   <% if @current_question %>
     <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-lg mx-auto border border-gray-200 flex flex-col items-center space-y-6 transition-all duration-300 ease-in-out">
       <h2 class="text-lg md:text-xl font-semibold text-gray-700 text-center">

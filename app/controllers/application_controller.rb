@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   include Sorcery::Controller
-  include Sorcery::Controller::Submodules::RememberMe
 
   before_action :auto_login_from_cookie
   before_action :require_login, unless: :public_action?

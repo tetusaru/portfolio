@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def auto_login_from_cookie
     Rails.logger.info ">>> auto_login_from_cookie called"
     return if logged_in?
-  
+
     user = login_from_cookie
     if user
       @current_user = user

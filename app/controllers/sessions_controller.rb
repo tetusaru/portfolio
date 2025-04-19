@@ -29,4 +29,10 @@ class SessionsController < ApplicationController
     logout
     redirect_to root_path, notice: "ログアウトしました。"
   end
+
+  private
+
+  def remember_me(user)
+    controller_remember_me(user)
+  end
 end

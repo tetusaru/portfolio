@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include Sorcery::Controller::Submodules::RememberMe::InstanceMethods
+
   skip_before_action :require_login, only: [ :passthru, :create, :failure ]
 
   def passthru
@@ -7,6 +9,7 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
+
     user = User.find_or_create_by(email: auth.info.email) do |u|
       u.name = auth.info.name
     end

@@ -7,8 +7,16 @@ class ApplicationController < ActionController::Base
   private
 
   def auto_login_from_cookie
+    Rails.logger.info ">>> auto_login_from_cookie called"
     return if logged_in?
-    @current_user = login_from_cookie
+
+    user = login_from_cookie
+    if user
+      @current_user = user
+      Rails.logger.info ">>> auto-login success for user=#{user.id}"
+    else
+      Rails.logger.info ">>> auto-login failed"
+    end
   end
 
   def not_authenticated

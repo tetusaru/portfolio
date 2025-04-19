@@ -11,8 +11,8 @@ class SessionsController < ApplicationController
       u.name = auth.info.name
     end
 
-    auto_login(user)                 # ログイン処理
-    remember_me!(user)              # ← ここが重要！
+    auto_login(user)
+    remember_me(user)
 
     redirect_to root_path, notice: "ログイン成功！"
   end

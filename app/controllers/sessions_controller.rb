@@ -15,8 +15,8 @@ class SessionsController < ApplicationController
       u.name = auth.info.name
     end
 
+    user.remember_me!
     auto_login(user)
-    remember_me(user)
 
     redirect_to root_path, notice: "ログイン成功！"
   end
@@ -28,11 +28,5 @@ class SessionsController < ApplicationController
   def destroy
     logout
     redirect_to root_path, notice: "ログアウトしました。"
-  end
-
-  private
-
-  def remember_me(user)
-    controller_remember_me(user)
   end
 end

@@ -12,6 +12,8 @@ class SessionsController < ApplicationController
     end
 
     auto_login(user)
+    remember_me!(user)
+
     redirect_to root_path, notice: "ログイン成功！"
   end
 

@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  include Sorcery::Controller::Submodules::RememberMe::InstanceMethods
 
   skip_before_action :require_login, only: [ :passthru, :create, :failure ]
 

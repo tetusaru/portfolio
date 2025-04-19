@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       u.name = auth.info.name
     end
 
-    session[:user_id] = user.id
+    auto_login(user)
     redirect_to root_path, notice: "ログイン成功！"
   end
 

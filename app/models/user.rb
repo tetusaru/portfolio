@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 255 }
   validates :password, length: { minimum: 3 }, if: -> { new_record? && crypted_password.present? }
   validates :password, confirmation: true, if: -> { password.present? }
+  validates :reset_password_token, uniqueness: true, allow_nil: true
 
   # テスト用のヘルパーとして追加
   def self.digest(string)

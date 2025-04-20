@@ -7,24 +7,13 @@
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-center text-2xl font-bold mb-6">パスワード再設定</h2>
 
-      <%= form_with url: password_reset_path, method: :patch, local: true do |f| %>
+      <%= form_with url: password_reset_path, method: :post, local: true, data: { turbo: false } do |f| %>
         <div class="mb-4">
-          <%= label_tag :email, "登録したメールアドレス", class: "block text-gray-700 font-medium mb-2" %>
-          <%= text_field_tag "user[email]", nil, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+          <%= label_tag :email, "メールアドレス" %>
+          <%= text_field_tag :email, nil, class: "w-full px-4 py-2 border rounded" %>
         </div>
-
-        <div class="mb-4">
-          <%= label_tag "user[password]", "新しいパスワード", class: "block text-gray-700 font-medium mb-2" %>
-          <%= password_field_tag "user[password]", nil, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
-        </div>
-
-        <div class="mb-6">
-          <%= label_tag "user[password_confirmation]", "確認用パスワード", class: "block text-gray-700 font-medium mb-2" %>
-          <%= password_field_tag "user[password_confirmation]", nil, class: "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
-        </div>
-
-        <div class="mb-6">
-          <%= submit_tag "変更", class: "w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" %>
+        <div>
+          <%= submit_tag "パスワードリセットメールを送る", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
         </div>
       <% end %>
     </div>

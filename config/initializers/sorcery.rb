@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = [ :remember_me, :external ]
+Rails.application.config.sorcery.submodules = [ :remember_me, :external, :reset_password ]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -244,6 +244,12 @@ Rails.application.config.sorcery.configure do |config|
   # --- user config ---
   config.user_config do |user|
     user.salt_attribute_name = nil
+    user.reset_password_token_attribute_name = :reset_password_token
+    user.reset_password_token_expires_at_attribute_name = :reset_password_token_expires_at
+    user.reset_password_email_sent_at_attribute_name = :reset_password_email_sent_at
+    user.reset_password_mailer = UserMailer
+    user.reset_password_email_method_name = :reset_password_email
+    user.email_delivery_method = :deliver_now
     # -- core --
     # Specify username attributes, for example: [:username, :email].
     # Default: `[:email]`

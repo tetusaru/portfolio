@@ -16,4 +16,8 @@ class User < ApplicationRecord
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def self.load_from_remember_me_token(token)
+    find_by(remember_me_token: token)
+  end
 end

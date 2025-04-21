@@ -19,18 +19,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # 👇 修正ポイント（トークン付きURLはブロックしないようにする）
   def not_authenticated
-    if params[:token].present?
-      Rails.logger.info ">>> skipping login requirement due to token"
-      return
-    end
     redirect_to login_path
   end
 
-  # 公開アクションを指定
+  # 🔓 公開アクションの条件に password_resets を明示追加！
   def public_action?
-    controller_name.in?(%w[top diagnoses]) &&
-      action_name.in?(%w[index survey survey_step2 new create show])
+    controller_name.in?(%w[top diagnoses password_resets]) &&
+      action_name.in?(%w[index survey survey_step2 new create show edit update])
   end
 end

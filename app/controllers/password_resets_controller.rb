@@ -1,6 +1,10 @@
 class PasswordResetsController < ApplicationController
   skip_before_action :require_login, only: [ :edit, :update, :create ]
 
+  def new
+    # メールアドレス入力用フォーム表示
+  end
+
   def edit
     Rails.logger.info ">>> PasswordResetsController#edit called with token=#{params[:token]}"
     @user = User.load_from_reset_password_token(params[:token])

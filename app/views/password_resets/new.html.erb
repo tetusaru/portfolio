@@ -1,5 +1,5 @@
 <h2>パスワードリセット申請</h2>
-<%= form_with url: password_reset_path, method: :post, local: true do |f| %>
+<%= form_with url: password_resets_path, method: :post, local: true do |f| %>
   <%= label_tag :email, "登録済みメールアドレス" %>
   <%= email_field_tag :email, nil, required: true %>
   <%= submit_tag "送信" %>

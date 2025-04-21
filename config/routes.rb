@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get "mysaunas/edit"
   get "mysaunas/update"
   get "mysaunas/destroy"
+
   root "top#index"
+
   get "/privacy", to: "pages#privacy", as: :privacy_policy
   get "/terms", to: "pages#terms", as: :terms_of_service
   get "/contact", to: "pages#contact", as: :contact
@@ -38,8 +40,10 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
   get "signup", to: "users#new", as: "signup"
   get "/maintenance", to: "pages#maintenance", as: "maintenance"
-  get "/password_reset/:token", to: "password_resets#edit", as: :edit_password_reset
-  patch "/password_reset/:token", to: "password_resets#update", as: :password_reset
-  post "/password_reset", to: "password_resets#create"
-  get "/password_reset_request", to: "password_resets#new", as: :new_password_reset
+
+  # パスワードリセット関連
+  get   "/password_reset_request",           to: "password_resets#new",    as: :new_password_reset
+  post  "/password_reset_request",           to: "password_resets#create", as: :password_resets
+  get   "/password_reset/:token",            to: "password_resets#edit",   as: :edit_password_reset
+  patch "/password_reset/:token",            to: "password_resets#update", as: :password_reset
 end

@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
   get "signup", to: "users#new", as: "signup"
   get "/maintenance", to: "pages#maintenance", as: "maintenance"
-  get "/password_reset", to: "password_resets#edit", as: :edit_password_reset
+  get "/password_reset/:token", to: "password_resets#edit", as: :edit_password_reset
   patch "/password_reset/:token", to: "password_resets#update", as: :password_reset
-  post  "/password_reset", to: "password_resets#create"
+  post "/password_reset", to: "password_resets#create"
 end

@@ -10,14 +10,14 @@ class PasswordResetsController < ApplicationController
 
   def update
     @user = User.load_from_reset_password_token(params[:token])
-  
+
     unless @user
       redirect_to root_path, alert: "トークンが無効または期限切れです。" and return
     end
-  
-    @user.password = password_params[ :password ]
-    @user.password_confirmation = password_params[ :password_confirmation ]
-  
+
+    @user.password = password_params[:password]
+    @user.password_confirmation = password_params[:password_confirmation]
+
     if @user.save
       redirect_to login_path, notice: "パスワードを変更しました。ログインしてください。"
     else

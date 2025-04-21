@@ -1,23 +1,24 @@
 class PasswordResetsController < ApplicationController
-  skip_before_action :require_login
+  skip_before_action :require_login, only: [ :edit, :update, :create ]
 
   def edit
     @user = User.load_from_reset_password_token(params[:token])
     unless @user
-      redirect_to root_path, alert: "リンクが無効または期限切れです。"
+      redirect_to root_path, alert: "トークンが無効または期限切れです。"
     end
   end
 
   def update
     @user = User.load_from_reset_password_token(params[:token])
+  
     unless @user
-      redirect_to root_path, alert: "リンクが無効または期限切れです。"
-      return
+      redirect_to root_path, alert: "トークンが無効または期限切れです。" and return
     end
-
-    @user.password_confirmation = password_params[:password_confirmation]
-
-    if @user.change_password(password_params[:password])
+  
+    @user.password = password_params[ :password ]
+    @user.password_confirmation = password_params[ :password_confirmation ]
+  
+    if @user.save
       redirect_to login_path, notice: "パスワードを変更しました。ログインしてください。"
     else
       flash.now[:alert] = "更新に失敗しました。"

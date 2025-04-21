@@ -32,7 +32,9 @@ class PasswordResetsController < ApplicationController
     if @user
       begin
         @user.deliver_reset_password_instructions!
-        Rails.logger.info "[PasswordReset] メール送信成功"
+        @user.reload
+
+        Rails.logger.info "[PasswordReset] メール送信成功: #{@user.reset_password_token}"
       rescue => e
         Rails.logger.error "[PasswordReset] メール送信失敗: #{e.message}"
       end

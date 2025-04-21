@@ -19,7 +19,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 👇 修正ポイント（トークン付きURLはブロックしないようにする）
   def not_authenticated
+    if params[:token].present?
+      Rails.logger.info ">>> skipping login requirement due to token"
+      return
+    end
     redirect_to login_path
   end
 

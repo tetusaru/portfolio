@@ -2,6 +2,7 @@ class PasswordResetsController < ApplicationController
   skip_before_action :require_login, only: [ :edit, :update, :create ]
 
   def edit
+    Rails.logger.info ">>> PasswordResetsController#edit called with token=#{params[:token]}"
     @user = User.load_from_reset_password_token(params[:token])
     unless @user
       redirect_to root_path, alert: "トークンが無効または期限切れです。"
@@ -32,9 +33,7 @@ class PasswordResetsController < ApplicationController
     if @user
       begin
         @user.deliver_reset_password_instructions!
-        @user.reload
-
-        Rails.logger.info "[PasswordReset] メール送信成功: #{@user.reset_password_token}"
+        Rails.logger.info "[PasswordReset] メール送信成功"
       rescue => e
         Rails.logger.error "[PasswordReset] メール送信失敗: #{e.message}"
       end

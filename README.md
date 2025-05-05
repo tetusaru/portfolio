@@ -1,33 +1,10 @@
-<<<<<<< HEAD
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-=======
-# portfolio
+# アプリ名：『Mysauna』
 ## サービス概要
 本アプリは自分に合ったサウナ施設を診断（検索）できるアプリになります。
-実際に行って、気に入った場合は「Mysauna」として登録、投稿することで他のユーザーとの交流しながら新しいサウナ施設の発見を目指します。
+実際に行って、気に入った場合は「Mysauna」として登録、投稿することで他のユーザーとの交流しながら新しいサウナ施設の発見を目指します。  
+
+## URL
+https://mysauna.jp/
 
 ## このサービスへの思い・作りたい理由
 昨今のサウナブームにより多くの人が様々なサウナ施設に行くようになりました。
@@ -35,47 +12,54 @@ Things you may want to cover:
 ですが、その好みに合ったサウナを探すのは意外と難しいです。
 そんな方のために自分の好みのサウナを診断できるアプリがあったら便利だと考えました。
 
-## ユーザー層について
-サウナ好きの20~40代の男女を主にフォーカスしようと思っています。
-この年代の方はどこかに行く時、インターネットで調べることが多いと考えています。
-
-## サービスの利用イメージ
-サウナに行きたいなと思った時にスマートフォンで簡単に調べることができます。
-サウナの好みに関するアンケートを回答していただき、その診断結果を見て実際にサウナに行ってもらいたいです。
-その結果、気に入った場合は「Mysauna」として登録していただき、本アプリ内への投稿、X（SNS）への共有をして他のユーザーとのサウナーコミュニティを楽しんでいただければ幸いです。
-
-## ユーザーの獲得について
-はじめに身近な友人、SNSでのサウナーの方に紹介して使用していただきます。
-その後はその方々の口コミやSNSの投稿によって少しずつユーザーを増やしていこうと考えております。
-
-## サービスの差別化ポイント・推しポイント
+## サービスの差別化ポイント
 https://sauna-ikitai.com/  
 実際にサウナ施設を検索するサービスとして上記のアプリが主流です。ですが、本アプリではもっと感覚的にサウナの好みに関するアンケートを答えていただき、診断するので
 また少し違う体験ができると考えております。自分の気にいったサウナ施設が見つかった場合は「Mysauna」として登録できる部分も他にはない機能だと思っています。
 
-## 機能候補
-「MVPリリース」  
-・ユーザー登録機能  
-・ログイン機能  
-・ログアウト機能  
-・サウナ診断機能  
-　→アンケート画面  
-　→診断結果画面  
-・サウナ施設詳細画面（googleマップの地図も載せたい）  
-・「Mysauna」機能（気に入ったサウナ施設を登録機能)  
-　→サウナの名称  
-　→画像投稿機能  
-　→自由記入欄(特徴等記入)  
-   
-「本リリース」  
-・「Mysauna」投稿機能   
-　→アプリ内  
-　→Xへの共有機能  
-・アプリ内投稿一覧画面  
+## 機能  
+> ## サウナ診断機能  
+>
+[![サウナ診断機能](https://gyazo.com/f6062f11b12dc7a7e7e46c6f7607ebfc/thumb/1000)](https://gyazo.com/f6062f11b12dc7a7e7e46c6f7607ebfc)  
+サウナについての設問に答えていただきます。  
+答えていただいた回答に基づいてユーザーに合ったサウナ施設を診断します。  
+  
+  
+> ## ユーザー登録/ログイン機能    
+>
+[![ユーザー登録/ログイン機能](https://gyazo.com/0aa1e74d5d19c1b8bc59795affff7fb7/thumb/1000)](https://gyazo.com/0aa1e74d5d19c1b8bc59795affff7fb7)  
+『ユーザー名』『メールアドレス』『パスワード』『確認用パスワード』を入力してユーザー登録を行います。  
+ユーザー登録後、ログイン画面にてログインを行っていただけます。  
+ログインにはGoogleアカウントを使用したGoogleログインも可能となっております。  
+  
+  
+> ## 「Mysauna」機能（気に入ったサウナ施設を登録、投稿機能)      
+>
+[![Mysauna機能](https://gyazo.com/a3a3196dde724a20cea082cdcc8e07a6/thumb/1000)](https://gyazo.com/a3a3196dde724a20cea082cdcc8e07a6)  
+Mysauna機能では『施設名』『コメント』『写真』を登録することができます。  
+登録していただいた内容はマイページで確認することができます。  
+マイページの編集、削除も可能です。    
+後、登録していただ内容はアプリ内で投稿、Xへの共有を行うことができます。  
 
- ## 画面遷移図  
-https://www.figma.com/design/E681ilBcBTePEwHv5c9E37/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&node-type=canvas&t=KikrDL5qoY2icosm-0  
+  
+## 技術構成について  
+### 使用技術
+
+| カテゴリ             | 技術内容                                                                 |
+|----------------------|--------------------------------------------------------------------------|
+| サーバーサイド       | Ruby on Rails 8.0.1・Ruby 3.x                                           |
+| フロントエンド       | ERB・JavaScript・Tailwind CSS                                           |
+| 認証機能             | Sorcery（パスワード/Googleログイン/リマインダー）                     |
+| CSSフレームワーク    | Tailwind CSS                                                            |
+| Web API              | Google Maps API                                                      |
+| データベースサーバー | PostgreSQL                                                              |
+| ファイルストレージ   | AWS S3（Active Storage）                                                |
+| アプリケーションサーバー | Render.com                                                           |
+| バージョン管理       | GitHub・GitHub Flow      
+
 
 ## ER図  
-https://drive.google.com/file/d/1DXD8M6trd8O6BNDhWtTq8aEDq1f8dhhs/view?usp=sharing  
->>>>>>> c398a14118ba485c2b5576fa40fca75a43f00936
+![Image](https://github.com/user-attachments/assets/3b420f9e-f9c9-488f-9427-4af13590301d)  
+  
+ ## 画面遷移図  
+https://www.figma.com/design/E681ilBcBTePEwHv5c9E37/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&node-type=canvas&t=KikrDL5qoY2icosm-0  

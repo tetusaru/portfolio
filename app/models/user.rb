@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :diagnoses, dependent: :destroy
   has_one :mysauna, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :favorites
+  has_many :favorite_sauna_facilities, through: :favorites, source: :sauna_facility
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true, length: { maximum: 255 }

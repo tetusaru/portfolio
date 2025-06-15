@@ -1,8 +1,27 @@
 <%= render 'shared/header' %>
 
 <main class="max-w-3xl mx-auto px-4 py-8">
+  <% flash.each do |type, message| %>
+    <% bg_color = case type.to_sym
+      when :notice then "bg-green-100 text-green-800 border-green-300"
+      when :alert  then "bg-red-100 text-red-800 border-red-300"
+      else "bg-gray-100 text-gray-800 border-gray-300"
+    end %>
+    <div class="max-w-xl mx-auto my-4 border-l-4 p-4 rounded <%= bg_color %>">
+      <p><%= message %></p>
+    </div>
+  <% end %>
   <h1 class="text-2xl font-bold text-gray-800"><%= @facility.name %></h1>
   <p class="text-gray-600 mt-2">場所: <%= @facility.location %></p>
+
+  <% if logged_in? %>
+    <% is_favorited = current_user.favorite_sauna_facilities.include?(@facility) %>
+    <%= button_to "♡",
+        is_favorited ? delete_favorite_path(sauna_facility_id: @facility.id) : favorites_path(sauna_facility_id: @facility.id),
+        method: is_favorited ? :delete : :post,
+        class: is_favorited ? "text-3xl text-red-500 hover:opacity-80 transition" : "text-3xl text-gray-400 hover:text-red-400 transition",
+        form: { data: { turbo: true } } %>
+  <% end %>
 
   <h2 class="text-lg font-bold mt-6">概要</h2>
   <p class="text-gray-700 mt-2"><%= @facility.details.presence || "情報がありません" %></p>

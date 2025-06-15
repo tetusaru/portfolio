@@ -71,6 +71,11 @@ class DiagnosesController < ApplicationController
     @result = facilities.first
 
     if @result
+      if logged_in?
+        diagnosis = current_user.diagnoses.create!
+        diagnosis.diagnosis_recommendations.create!(sauna_facility: @result)
+      end
+
       redirect_to diagnosis_path(id: @result.id)
     else
       redirect_to diagnosis_path(id: 0, no_result: true)

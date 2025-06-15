@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :diagnoses, only: [ :create, :show ]
   resources :sauna_facilities, only: [ :index, :show ]
   resources :posts, only: [ :index, :create, :destroy, :show ]
+  resources :favorites, only: [ :create ]
+  delete "/favorites", to: "favorites#destroy", as: :delete_favorite
 
   get "/survey", to: "diagnoses#survey"
   post "/survey/answer", to: "diagnoses#answer"

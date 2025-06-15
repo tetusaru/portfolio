@@ -3,6 +3,8 @@ require "json"
 
 class SaunaFacility < ApplicationRecord
   has_many :diagnosis_results, dependent: :destroy
+  has_many :favorites
+  has_many :favorited_by_users, through: :favorites, source: :user
 
   validates :name, presence: true
   validates :location, presence: true

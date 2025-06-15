@@ -82,9 +82,14 @@
 
       <ul class="list-disc pl-6 space-y-2 mb-6">
         <% current_user.favorite_sauna_facilities.each do |facility| %>
-          <li>
-            <%= link_to facility.name, sauna_facility_path(facility), class: "text-blue-600 underline" %>
-            <span class="text-gray-500 text-sm">（<%= facility.location %>）</span>
+          <li class="flex items-center space-x-4">
+            <div>
+              <%= link_to facility.name, sauna_facility_path(facility), class: "text-blue-600 underline" %>
+              <span class="text-gray-500 text-sm">（<%= facility.location %>）</span>
+            </div>
+            <%= link_to "ここに行く", "https://www.google.com/maps/dir/?api=1&destination=#{facility.latitude},#{facility.longitude}",
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded text-xs sm:text-sm inline-block",
+              target: "_blank", rel: "noopener" %>
           </li>
         <% end %>
       </ul>
@@ -97,10 +102,41 @@
       function initFavoriteMap() {
         const map = new google.maps.Map(document.getElementById("favorite-map"), {
           zoom: 10,
-          center: { lat: 35.68, lng: 139.76 }, // 東京中心（デフォルト）
+          center: { lat: 35.68, lng: 139.76 } // 初期は東京中心
         });
 
+        // 現在地を取得して中心にセット
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              const currentLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+              map.setCenter(currentLocation);
+
+              // 現在地にマーカーも追加（任意）
+              new google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: "現在地",
+                icon: {
+                  path: google.maps.SymbolPath.CIRCLE,
+                  scale: 6,
+                  fillColor: "#4285F4",
+                  fillOpacity: 1,
+                  strokeWeight: 1,
+                }
+              });
+            },
+            () => {
+              console.warn("位置情報が取得できませんでした。デフォルトの中心を使用します。");
+            }
+          );
+        }
+
         const facilities = <%= raw(current_user.favorite_sauna_facilities.to_json(only: [:name, :latitude, :longitude])) %>;
+
         facilities.forEach(facility => {
           const marker = new google.maps.Marker({
             position: { lat: facility.latitude, lng: facility.longitude },

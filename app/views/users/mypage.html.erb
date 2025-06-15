@@ -11,7 +11,6 @@
   <% end %>
 
   <h1 class="text-2xl font-bold mb-4">マイページ</h1>
-  <p>ようこそ、<%= @user.name %> さん</p>
   <p>メールアドレス: <%= @user.email %></p>
 
   <% if @mysauna.present? %>
@@ -48,6 +47,81 @@
     <p class="mt-4">まだMysaunaは登録されていません。</p>
     <%= link_to "Mysaunaを登録する", new_mysauna_path, class: "bg-blue-500 text-white py-2 px-4 rounded mt-2 inline-block" %>
   <% end %>
+  <% if @user.diagnoses.exists? %>
+    <div class="mt-10">
+      <h2 class="text-xl font-semibold mb-4">診断履歴</h2>
+      <% @user.diagnoses.order(created_at: :desc).each do |diagnosis| %>
+        <% if diagnosis.diagnosis_recommendations.any? %>
+          <div class="border rounded p-3 mb-2 bg-white shadow">
+            <p class="text-sm text-gray-600 mb-1"><%= l diagnosis.created_at, format: :short %> に診断</p>
+            <% diagnosis.diagnosis_recommendations.each do |rec| %>
+              <div class="flex items-center justify-between">
+                <%= link_to rec.sauna_facility.name, sauna_facility_path(rec.sauna_facility), class: "text-blue-600 underline" %>
+                <% if current_user.favorite_sauna_facilities.include?(rec.sauna_facility) %>
+                  <%= button_to "♡", delete_favorite_path(sauna_facility_id: rec.sauna_facility.id),
+                    method: :delete,
+                    class: "text-red-500",
+                    form: { data: { turbo: false } } %>
+                <% else %>
+                  <%= button_to "♡", favorites_path(sauna_facility_id: rec.sauna_facility.id),
+                    method: :post,
+                    class: "text-gray-400",
+                    form: { data: { turbo: false } } %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <!-- ✅ お気に入り一覧・マップ追加ブロックここから -->
+  <% if current_user.favorite_sauna_facilities.exists? %>
+    <div class="mt-10">
+      <h2 class="text-xl font-semibold mb-4">お気に入りサウナ一覧</h2>
+
+      <ul class="list-disc pl-6 space-y-2 mb-6">
+        <% current_user.favorite_sauna_facilities.each do |facility| %>
+          <li>
+            <%= link_to facility.name, sauna_facility_path(facility), class: "text-blue-600 underline" %>
+            <span class="text-gray-500 text-sm">（<%= facility.location %>）</span>
+          </li>
+        <% end %>
+      </ul>
+
+      <h2 class="text-xl font-semibold mb-4">お気に入りサウナMAP</h2>
+      <div id="favorite-map" style="height: 400px;" class="rounded shadow border border-gray-300"></div>
+    </div>
+
+    <script>
+      function initFavoriteMap() {
+        const map = new google.maps.Map(document.getElementById("favorite-map"), {
+          zoom: 10,
+          center: { lat: 35.68, lng: 139.76 }, // 東京中心（デフォルト）
+        });
+
+        const facilities = <%= raw(current_user.favorite_sauna_facilities.to_json(only: [:name, :latitude, :longitude])) %>;
+        facilities.forEach(facility => {
+          const marker = new google.maps.Marker({
+            position: { lat: facility.latitude, lng: facility.longitude },
+            map: map,
+            title: facility.name
+          });
+
+          const info = new google.maps.InfoWindow({
+            content: `<strong>${facility.name}</strong>`
+          });
+
+          marker.addListener("click", () => {
+            info.open(map, marker);
+          });
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initFavoriteMap"></script>
+  <% end %>
+  <!-- ✅ お気に入りマップ追加ブロックここまで -->
+
 </div>
 
 <%= render 'shared/footer' %>

@@ -1,26 +1,74 @@
 <%= render 'shared/header' %>
-<% if flash[:notice] %>
-  <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
-    <p><%= flash[:notice] %></p>
-  </div>
-<% end %>
 
-<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
-  <!-- タイトル部分 -->
-  <h1 class="text-base md:text-lg text-gray-500 mt-10">自分好みのサウナを見つける</h1>
-  <h2 class="text-4xl md:text-6xl font-bold text-black my-4">Mysauna</h2>
+<main>
+  <!-- ヒーローセクション（画像全幅＋scroll）-->
+  <section class="relative bg-white w-full overflow-hidden">
+    <%= image_tag 'logo.png', alt: 'Mysauna', class: 'w-full h-auto object-cover' %>
+    <div class="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm animate-bounce z-10">
+      ▼ scroll
+    </div>
+  </section>
 
-  <div class="w-full max-w-md mt-8 flex flex-col space-y-4">
-    <a href="/survey" class="bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">
-      さっそく探す
-    </a>
-    <a href="<%= new_mysauna_path %>" class="bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">
-      Mysaunaを登録
-    </a>
-    <a href="<%= posts_path %>" class="bg-blue-500 text-white text-lg font-medium py-3 rounded hover:bg-blue-600 text-center">  
-      みんなのサウナ
-    </a>
-  </div>
+  <!-- カードセクション -->
+  <section class="bg-gray-50 py-32 px-4">
+    <div id="scroll-buttons"
+         class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto opacity-0 translate-y-10 transition duration-1000 ease-out">
+  
+      <!-- カード: 診断する -->
+      <div class="bg-white rounded-2xl shadow-xl p-10 text-center">
+        <!-- 👇メッセージ -->
+        <p class="text-lg font-semibold text-sky-600 mb-4 animate-blink">
+          👇 まずはこちらから！
+        </p>
+
+        <img src="<%= asset_path('icon_sindan.png') %>" alt="診断アイコン" class="w-24 h-24 mx-auto mb-6" />
+        <h3 class="text-2xl font-bold text-sky-600 mb-3">あなたにぴったりのサウナを診断！</h3>
+        <p class="text-gray-700 text-base mb-6">サウナタイプ・温度・雰囲気などから、あなたに合う施設を提案します。</p>
+        <a href="/survey"
+            class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
+          診断する
+        </a>
+      </div>
+  
+      <!-- カード: Mysauna登録 -->
+      <div class="bg-white rounded-2xl shadow-xl p-10 text-center">
+        <img src="<%= asset_path('icon_register.png') %>" alt="登録アイコン" class="w-24 h-24 mx-auto mb-6" />
+        <h3 class="text-2xl font-bold text-sky-600 mb-3">お気に入りのサウナを記録しよう！</h3>
+        <p class="text-gray-700 text-base mb-6">あなたが訪れたサウナ施設を、登録できます！</p>
+        <a href="<%= new_mysauna_path %>"
+           class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
+          Mysaunaを登録
+        </a>
+      </div>
+  
+      <!-- カード: みんなのサウナ -->
+      <div class="bg-white rounded-2xl shadow-xl p-10 text-center">
+        <img src="<%= asset_path('icon_community.png') %>" alt="みんなのサウナアイコン" class="w-24 h-24 mx-auto mb-6" />
+        <h3 class="text-2xl font-bold text-sky-600 mb-3">他のサウナーの投稿を見てみよう！</h3>
+        <p class="text-gray-700 text-base mb-6">全国のサウナーが投稿したおすすめ施設をチェックしよう。</p>
+        <a href="<%= posts_path %>"
+           class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
+          みんなのサウナ
+        </a>
+      </div>
+  
+    </div>
+  </section>
 </main>
 
 <%= render 'shared/footer' %>
+
+<!-- JavaScript for scroll animation -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const target = document.getElementById("scroll-buttons");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("opacity-0", "translate-y-10");
+        }
+      });
+    }, { threshold: 0.3 });
+    if (target) observer.observe(target);
+  });
+</script>

@@ -33,6 +33,9 @@ group :development, :test do
   gem "brakeman", "~> 7.0.0"
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"
+  gem "rspec-rails"
+  gem 'rails-i18n'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -42,4 +45,5 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'shoulda-matchers', '~> 5.3'
 end

@@ -87,6 +87,3 @@ RSpec.describe "Diagnoses", type: :request do
     end
   end
 end
-
-
-

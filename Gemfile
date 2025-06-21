@@ -34,8 +34,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"
   gem "rspec-rails"
-  gem 'rails-i18n'
-  gem 'factory_bot_rails'
+  gem "rails-i18n"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -45,5 +45,5 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
-  gem 'shoulda-matchers', '~> 5.3'
+  gem "shoulda-matchers", "~> 5.3"
 end

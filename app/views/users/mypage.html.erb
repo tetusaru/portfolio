@@ -89,12 +89,15 @@
         <h3 class="font-semibold mb-2">お気に入りサウナ一覧</h3>
         <ul class="space-y-2 max-h-80 overflow-y-auto pr-1">
           <% current_user.favorite_sauna_facilities.each do |facility| %>
-            <li class="flex items-center justify-between">
+            <li class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
               <div>
                 <%= link_to facility.name, sauna_facility_path(facility), class: "text-blue-600 underline" %>
                 <span class="text-gray-500 text-sm">（<%= facility.location %>）</span>
               </div>
-              <%= link_to "ここに行く", "https://www.google.com/maps/dir/?api=1&destination=#{facility.latitude},#{facility.longitude}", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded text-xs sm:text-sm", target: "_blank", rel: "noopener" %>
+              <%= link_to "ここに行く",
+                          "https://www.google.com/maps/dir/?api=1&destination=#{facility.latitude},#{facility.longitude}",
+                          class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded text-xs sm:text-sm self-start sm:self-auto",
+                          target: "_blank", rel: "noopener" %>
             </li>
           <% end %>
         </ul>

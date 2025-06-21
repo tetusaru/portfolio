@@ -57,18 +57,3 @@
 </main>
 
 <%= render 'shared/footer' %>
-
-<!-- JavaScript for scroll animation -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const target = document.getElementById("scroll-buttons");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("opacity-0", "translate-y-10");
-        }
-      });
-    }, { threshold: 0.3 });
-    if (target) observer.observe(target);
-  });
-</script>

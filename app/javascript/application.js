@@ -4,3 +4,4 @@ Rails.start();
 
 import "@hotwired/turbo-rails"
 import "./controllers"
+import "./top_scroll_animation"

@@ -84,7 +84,7 @@ class DiagnosesController < ApplicationController
         { facility: facility, score: score }
       end
 
-    # スコアが2点以上の施設のみ対象にする
+      # スコアが2点以上の施設のみ対象にする
       filtered = scored.select { |s| s[:score] >= 2 }
       best_match = filtered.max_by { |s| s[:score] }
 

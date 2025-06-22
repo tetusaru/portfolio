@@ -59,6 +59,7 @@ class DiagnosesController < ApplicationController
       redirect_to diagnosis_path(id: 0, no_result: true) and return
     end
 
+    # 完全一致で検索
     facilities = SaunaFacility.all
     facilities = facilities.where(temperature_level: TEMPERATURE_MAP[session[:answers]["1"]]) if session[:answers]["1"].present?
     facilities = facilities.where(outdoor_bath: true) if session[:answers]["2"] == "はい"
@@ -67,15 +68,34 @@ class DiagnosesController < ApplicationController
     facilities = facilities.where("location LIKE ?", "%#{session[:answers]['7']}%") if session[:answers]["7"].present?
     facilities = facilities.where(atmosphere: ATMOSPHERE_MAP[session[:answers]["5"]]) if session[:answers]["5"].present?
 
-    Rails.logger.debug "絞り込まれた施設: #{facilities.map(&:name).inspect}"
+    Rails.logger.debug "完全一致で絞り込まれた施設: #{facilities.map(&:name).inspect}"
     @result = facilities.first
 
+    # 完全一致で見つからなかった場合 → 類似候補をスコア付きで検索
+    if @result.nil?
+      all_facilities = SaunaFacility.where("location LIKE ?", "%#{session[:answers]['7']}%")
+      scored = all_facilities.map do |facility|
+        score = 0
+        score += 1 if session[:answers]["1"].present? && facility.temperature_level == TEMPERATURE_MAP[session[:answers]["1"]]
+        score += 1 if session[:answers]["2"] == "はい" && facility.outdoor_bath
+        score += 1 if session[:answers]["3"] == "はい" && facility.cold_bath
+        score += 1 if session[:answers]["4"].present? && facility.facility_type == FACILITY_TYPE_MAP[session[:answers]["4"]]
+        score += 1 if session[:answers]["5"].present? && facility.atmosphere == ATMOSPHERE_MAP[session[:answers]["5"]]
+        { facility: facility, score: score }
+      end
+
+    # スコアが2点以上の施設のみ対象にする
+    filtered = scored.select { |s| s[:score] >= 2 }
+    best_match = filtered.max_by { |s| s[:score] }
+
+    @result = best_match[:facility] if best_match
+  end
+  
     if @result
       if logged_in?
         diagnosis = current_user.diagnoses.create!
         diagnosis.diagnosis_recommendations.create!(sauna_facility: @result)
       end
-
       redirect_to diagnosis_path(id: @result.id)
     else
       redirect_to diagnosis_path(id: 0, no_result: true)

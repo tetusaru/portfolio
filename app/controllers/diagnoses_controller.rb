@@ -85,12 +85,12 @@ class DiagnosesController < ApplicationController
       end
 
     # スコアが2点以上の施設のみ対象にする
-    filtered = scored.select { |s| s[:score] >= 2 }
-    best_match = filtered.max_by { |s| s[:score] }
+      filtered = scored.select { |s| s[:score] >= 2 }
+      best_match = filtered.max_by { |s| s[:score] }
 
-    @result = best_match[:facility] if best_match
-  end
-  
+      @result = best_match[:facility] if best_match
+    end
+
     if @result
       if logged_in?
         diagnosis = current_user.diagnoses.create!

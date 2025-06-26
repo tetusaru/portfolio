@@ -1,9 +1,12 @@
 <%= render 'shared/header' %>
 
-<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-  <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 mb-10 text-center tracking-wide">
-    サウナのお好みを教えて！
-  </h1>
+<main class="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 relative">
+  <!-- タイトル -->
+  <div class="mb-10">
+    <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 text-center tracking-wide">
+      サウナのお好みを教えて！
+    </h1>
+  </div>
 
   <% if @current_question[:id] == 6 %>
     <div class="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded mb-4 w-full max-w-lg text-sm">
@@ -16,7 +19,8 @@
   <% end %>
 
   <% if @current_question %>
-    <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-lg mx-auto border border-gray-200 flex flex-col items-center space-y-6 transition-all duration-300 ease-in-out">
+    <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-lg mx-auto border border-gray-200 flex flex-col items-center space-y-6 transition-all duration-300 ease-in-out relative">
+      <!-- 設問タイトル -->
       <h2 class="text-lg md:text-xl font-semibold text-gray-700 text-center">
         <%= @current_question[:text] %>
       </h2>
@@ -38,10 +42,27 @@
           <% end %>
         </div>
 
-        <button name="button" type="submit"
-          class="block mx-auto bg-blue-500 text-white py-3 px-4 w-32 rounded-full shadow-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 ease-in-out text-lg font-semibold">
-          <%= @current_question[:id] == 7 ? "診断する" : "次へ" %>
-        </button>
+        <!-- ボタンとイラスト配置 -->
+        <div class="w-full relative flex justify-center items-end mt-6">
+          <!-- 左側の犬イラスト -->
+          <%= image_tag 'dog_sauna.png',
+              alt: 'サウナ犬',
+              class: 'w-16 h-auto object-contain absolute left-0 bottom-0',
+              data: { frame1: asset_path('dog_sauna.png') } %>
+
+          <!-- 中央のボタン -->
+          <button name="button" type="submit"
+            class="bg-blue-500 text-white py-3 px-4 w-32 rounded-full shadow-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 ease-in-out text-lg font-semibold z-10">
+            <%= @current_question[:id] == 7 ? "診断する" : "次へ" %>
+          </button>
+
+          <!-- 右側の熱波師イラスト -->
+          <%= image_tag 'nepashi1.png',
+              alt: '熱波師',
+              id: 'nepashi',
+              class: 'w-14 h-auto object-contain absolute right-0 bottom-0',
+              data: { frame1: asset_path('nepashi1.png'), frame2: asset_path('nepashi2.png') } %>
+        </div>
       <% end %>
     </div>
   <% else %>
@@ -49,6 +70,5 @@
       <p class="text-gray-800">診断が正常に開始できませんでした。</p>
     </div>
   <% end %>
-</main>
 
 <%= render 'shared/footer' %>

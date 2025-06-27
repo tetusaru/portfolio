@@ -1,7 +1,7 @@
 <%= render 'shared/header' %>
 
 <main>
-  <!-- ヒーローセクション（画像全幅＋scroll）-->
+  <!-- ヒーローセクション -->
   <section class="relative bg-white w-full overflow-hidden">
     <%= image_tag 'logo.png', alt: 'Mysauna', class: 'w-full h-auto object-cover' %>
     <div class="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm animate-bounce z-10">
@@ -13,45 +13,33 @@
   <section class="bg-gray-50 py-32 px-4">
     <div id="scroll-buttons"
          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto opacity-0 translate-y-10 transition duration-1000 ease-out">
-  
-      <!-- カード: 診断する -->
-      <div class="bg-white rounded-2xl shadow-xl p-10 text-center">
-        <!-- 👇メッセージ -->
-        <p class="text-lg font-semibold text-sky-600 mb-4 animate-blink">
-          👇 まずはこちらから！
-        </p>
 
-        <img src="<%= asset_path('icon_sindan.png') %>" alt="診断アイコン" class="w-24 h-24 mx-auto mb-6" />
-        <h3 class="text-2xl font-bold text-sky-600 mb-3">あなたにぴったりのサウナを診断！</h3>
-        <p class="text-gray-700 text-base mb-6">サウナタイプ・温度・雰囲気などから、あなたに合う施設を提案します。</p>
-        <a href="/survey"
-            class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
-          診断する
-        </a>
-      </div>
-  
-      <!-- カード: Mysauna登録 -->
-      <div class="bg-white rounded-2xl shadow-xl p-10 text-center">
-        <img src="<%= asset_path('icon_register.png') %>" alt="登録アイコン" class="w-24 h-24 mx-auto mb-6" />
-        <h3 class="text-2xl font-bold text-sky-600 mb-3">お気に入りのサウナを記録しよう！</h3>
-        <p class="text-gray-700 text-base mb-6">あなたが訪れたサウナ施設を、登録できます！</p>
-        <a href="<%= new_mysauna_path %>"
-           class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
-          Mysaunaを登録
-        </a>
-      </div>
-  
-      <!-- カード: みんなのサウナ -->
-      <div class="bg-white rounded-2xl shadow-xl p-10 text-center">
-        <img src="<%= asset_path('icon_community.png') %>" alt="みんなのサウナアイコン" class="w-24 h-24 mx-auto mb-6" />
-        <h3 class="text-2xl font-bold text-sky-600 mb-3">他のサウナーの投稿を見てみよう！</h3>
-        <p class="text-gray-700 text-base mb-6">全国のサウナーが投稿したおすすめ施設をチェックしよう。</p>
-        <a href="<%= posts_path %>"
-           class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
-          みんなのサウナ
-        </a>
-      </div>
-  
+      <% cards = [
+        { img: 'icon_sindan.png', title: 'あなたにぴったりのサウナを診断！', desc: 'サウナタイプ・温度・雰囲気などから、あなたに合う施設を提案します。', link: '/survey', btn: '診断する' },
+        { img: 'icon_register.png', title: 'お気に入りのサウナを記録しよう！', desc: 'あなたが訪れたサウナ施設を、登録できます！', link: new_mysauna_path, btn: 'Mysaunaを登録' },
+        { img: 'icon_community.png', title: '他のサウナーの投稿を見てみよう！', desc: '全国のサウナーが投稿したおすすめ施設をチェックしよう。', link: posts_path, btn: 'みんなのサウナ' }
+      ] %>
+
+      <% cards.each_with_index do |card, index| %>
+        <div class="bg-white rounded-2xl shadow-xl p-10 text-center flex flex-col justify-start">
+          <% if index == 0 %>
+            <p class="text-lg font-semibold text-sky-600 mb-4 animate-blink">
+              👇 まずはこちらから！
+            </p>
+          <% else %>
+            <div class="h-9 mb-4"></div> <!-- 他カードとの高さ調整用 -->
+          <% end %>
+
+          <img src="<%= asset_path(card[:img]) %>" alt="" class="w-24 h-24 mx-auto mb-6" />
+          <h3 class="text-2xl font-bold text-sky-600 mb-3"><%= card[:title] %></h3>
+          <p class="text-gray-700 text-base mb-6"><%= card[:desc] %></p>
+          <a href="<%= card[:link] %>"
+             class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full shadow transition text-lg font-semibold inline-block">
+            <%= card[:btn] %>
+          </a>
+        </div>
+      <% end %>
+
     </div>
   </section>
 </main>

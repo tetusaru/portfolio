@@ -1,5 +1,4 @@
 <div class="min-h-screen bg-gray-50 flex flex-col justify-between">
-  <!-- ヘッダー -->
   <%= render 'shared/header' %>
 
   <% if flash[:notice] %>
@@ -8,7 +7,6 @@
     </div>
   <% end %>
 
-  <!-- ログインフォーム -->
   <main class="flex-1 flex items-center justify-center px-4">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h2 class="text-center text-2xl font-bold mb-6">ログイン</h2>
@@ -33,18 +31,23 @@
         </div>
 
         <div class="mb-4 flex items-center">
-        <%= f.check_box :remember_me, { class: "form-checkbox text-blue-600" }, '1', '0' %>
+          <%= f.check_box :remember_me, { class: "form-checkbox text-blue-600" }, '1', '0' %>
           <span class="ml-2 text-gray-700">次回から自動的にログインする</span>
         </div>
-
-        <div class="text-center text-gray-600">
-          <%= link_to 'はじめての方はこちら', signup_path, class: 'text-blue-500 hover:underline block mb-1' %>
-          <%= link_to 'Googleアカウントでログイン', "/auth/google_oauth2", class: 'text-blue-500 hover:underline' %>
-        </div>
       <% end %>
+
+      <div class="text-center text-gray-600 mt-6 space-y-2">
+        <%= link_to 'はじめての方はこちら', signup_path, class: 'text-blue-500 hover:underline block' %>
+
+        <%= link_to '/auth/google_oauth2',
+          class: 'block mx-auto w-44 hover:brightness-90 transition duration-300 shadow-md hover:shadow-lg rounded-md overflow-hidden' do %>
+          <%= image_tag 'google_icon.svg',
+            alt: 'Googleでログイン',
+            class: 'w-full h-auto' %>
+        <% end %>
+      </div>
     </div>
   </main>
 
-  <!-- フッター -->
   <%= render 'shared/footer' %>
 </div>

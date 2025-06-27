@@ -49,11 +49,10 @@ RSpec.describe "Diagnoses", type: :request do
         answer: "東京"
       }
 
-      expect(response).to redirect_to(diagnosis_path(id: facility.id))
+      expect(response).to redirect_to("/sauna_facilities/#{facility.id}")
     end
 
     it "診断結果が見つからない場合に no_result にリダイレクトされる" do
-      # 条件に一致しない施設を追加しておく（東京以外）
       SaunaFacility.create!(
         name: "条件不一致サウナ",
         location: "北海道",

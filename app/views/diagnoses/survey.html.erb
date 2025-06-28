@@ -42,13 +42,13 @@
           <% end %>
         </div>
 
-        <!-- ボタンとイラスト配置 -->
-        <div class="w-full relative flex justify-center items-end mt-6">
+        <!-- イラストとボタンのコンテナ -->
+        <div class="w-full relative flex items-end justify-center mt-6">
           <!-- 左側の犬イラスト -->
           <%= image_tag 'dog_sauna.png',
-              alt: 'サウナ犬',
-              class: 'w-28 h-auto object-contain absolute left-0 bottom-4',
-              data: { frame1: asset_path('dog_sauna.png') } %>
+            alt: 'サウナ犬',
+            class: 'w-20 md:w-28 h-auto object-contain absolute left-0 bottom-2 md:bottom-4',
+            data: { frame1: asset_path('dog_sauna.png') } %>
 
           <!-- 中央のボタン -->
           <button name="button" type="submit"
@@ -58,10 +58,10 @@
 
           <!-- 右側の熱波師イラスト -->
           <%= image_tag 'nepashi1.png',
-              alt: '熱波師',
-              id: 'nepashi',
-              class: 'w-24 h-auto object-contain absolute right-0 bottom-4',
-              data: { frame1: asset_path('nepashi1.png'), frame2: asset_path('nepashi2.png') } %>
+            alt: '熱波師',
+            id: 'nepashi',
+            class: 'w-16 md:w-24 h-auto object-contain absolute right-0 bottom-2 md:bottom-4',
+            data: { frame1: asset_path('nepashi1.png'), frame2: asset_path('nepashi2.png') } %>
         </div>
       <% end %>
     </div>
@@ -70,5 +70,6 @@
       <p class="text-gray-800">診断が正常に開始できませんでした。</p>
     </div>
   <% end %>
+</main>
 
 <%= render 'shared/footer' %>

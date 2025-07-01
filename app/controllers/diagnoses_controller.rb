@@ -96,7 +96,7 @@ class DiagnosesController < ApplicationController
         diagnosis = current_user.diagnoses.create!
         diagnosis.diagnosis_recommendations.create!(sauna_facility: @result)
       end
-      redirect_to sauna_facility_path(@result)
+      redirect_to sauna_facility_path(@result, from_diagnosis: true)
     else
       redirect_to diagnosis_path(id: 0, no_result: true)
     end

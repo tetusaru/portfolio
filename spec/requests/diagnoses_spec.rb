@@ -49,7 +49,7 @@ RSpec.describe "Diagnoses", type: :request do
         answer: "東京"
       }
 
-      expect(response).to redirect_to("/sauna_facilities/#{facility.id}")
+      expect(response).to redirect_to("/sauna_facilities/#{facility.id}?from_diagnosis=true")
     end
 
     it "診断結果が見つからない場合に no_result にリダイレクトされる" do

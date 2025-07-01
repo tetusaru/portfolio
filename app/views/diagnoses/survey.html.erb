@@ -44,19 +44,17 @@
 
         <!-- イラストとボタンのコンテナ -->
         <div class="w-full relative flex items-end justify-center mt-6">
-          <!-- 左側の犬イラスト -->
+
           <%= image_tag 'dog_sauna.png',
             alt: 'サウナ犬',
             class: 'w-20 md:w-28 h-auto object-contain absolute left-0 bottom-2 md:bottom-4',
             data: { frame1: asset_path('dog_sauna.png') } %>
 
-          <!-- 中央のボタン -->
           <button name="button" type="submit"
             class="bg-blue-500 text-white py-3 px-4 w-32 rounded-full shadow-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 ease-in-out text-lg font-semibold z-10">
             <%= @current_question[:id] == 7 ? "診断する" : "次へ" %>
           </button>
 
-          <!-- 右側の熱波師イラスト -->
           <%= image_tag 'nepashi1.png',
             alt: '熱波師',
             id: 'nepashi',

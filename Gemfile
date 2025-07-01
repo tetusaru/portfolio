@@ -27,7 +27,7 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 
 group :development, :test do
-  gem "brakeman", "~> 7.0.0"
+  gem "brakeman", "~> 7.0.2"
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"
   gem "rspec-rails"

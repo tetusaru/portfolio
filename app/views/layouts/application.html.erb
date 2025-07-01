@@ -10,7 +10,7 @@
 
   <%= yield :head %>
 
-  <!-- ✅ Google Analytics -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QY0J49LBEK"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -19,7 +19,7 @@
     gtag('config', 'G-QY0J49LBEK');
   </script>
 
-  <!-- OGP設定（静的） -->
+  <!-- OGP設定 -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Mysauna" />
   <meta property="og:title" content="Mysauna | あなたにぴったりのサウナを見つけよう" />
@@ -38,7 +38,7 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icon.png">
 
-  <!-- ✅ TailwindをビルドしたCSSのみ読み込み -->
+  <!-- TailwindをビルドしたCSSのみ読み込み -->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
   <!-- JavaScript -->

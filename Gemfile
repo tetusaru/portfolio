@@ -12,8 +12,6 @@ gem "jbuilder"
 
 gem "aws-sdk-s3", require: false
 
-# gem 'tzinfo-data', platforms: %i[ windows jruby ]
-
 gem "solid_cache"
 gem "solid_queue", "1.1.4"
 gem "solid_cable", "~> 3.0.5"
@@ -29,7 +27,6 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 
 group :development, :test do
-  # gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"  ← 一時的にコメントアウト
   gem "brakeman", "~> 7.0.0"
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"

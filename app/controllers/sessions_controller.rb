@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     end
 
     user.remember_me!  # トークンと有効期限を生成
-    user.save!         # DBに保存（←これが必要！）
+    user.save!         # DBに保存
 
     auto_login(user)   # セッションログイン
     set_remember_me_cookie(user) # Cookieに remember_me_token を設定

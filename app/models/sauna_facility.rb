@@ -14,7 +14,7 @@ class SaunaFacility < ApplicationRecord
 
   before_validation :set_coordinates, if: -> { location_changed? || latitude.blank? || longitude.blank? || latitude == 0.0 || longitude == 0.0 }
 
-  # 🔹 既存データの緯度経度を一括更新するメソッド
+  # 既存データの緯度経度を一括更新するメソッド
   def self.update_all_coordinates
     SaunaFacility.find_each do |facility|
       facility.send(:set_coordinates)

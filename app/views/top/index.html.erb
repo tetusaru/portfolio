@@ -1,7 +1,6 @@
 <%= render 'shared/header' %>
 
 <main>
-  <!-- ヒーローセクション -->
   <section class="relative bg-white w-full overflow-hidden">
     <%= image_tag 'logo.png', alt: 'Mysauna', class: 'w-full h-auto object-cover' %>
     <div class="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm animate-bounce z-10">
@@ -9,7 +8,6 @@
     </div>
   </section>
 
-  <!-- カードセクション -->
   <section class="bg-gray-50 py-32 px-4">
     <div id="scroll-buttons"
          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto opacity-0 translate-y-10 transition duration-1000 ease-out">
@@ -27,7 +25,7 @@
               👇 まずはこちらから！
             </p>
           <% else %>
-            <div class="h-9 mb-4"></div> <!-- 他カードとの高さ調整用 -->
+            <div class="h-9 mb-4"></div>
           <% end %>
 
           <img src="<%= asset_path(card[:img]) %>" alt="" class="w-24 h-24 mx-auto mb-6" />

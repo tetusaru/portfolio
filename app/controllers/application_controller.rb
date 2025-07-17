@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     redirect_to login_path
   end
 
-  # 🔓 公開アクションの条件に password_resets を明示追加！
+  # 公開アクションの条件に password_resets を追加
   def public_action?
     controller_name.in?(%w[top diagnoses password_resets]) &&
       action_name.in?(%w[index survey survey_step2 new create show edit update])

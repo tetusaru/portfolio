@@ -14,11 +14,11 @@ class SessionsController < ApplicationController
       u.name = auth.info.name
     end
 
-    user.remember_me!  # トークンと有効期限を生成
-    user.save!         # DBに保存
+    user.remember_me!
+    user.save!
 
-    auto_login(user)   # セッションログイン
-    set_remember_me_cookie(user) # Cookieに remember_me_token を設定
+    auto_login(user)
+    set_remember_me_cookie(user)
 
     redirect_to root_path, notice: "ログイン成功！"
   end
@@ -34,7 +34,6 @@ class SessionsController < ApplicationController
 
   private
 
-  # Cookie に remember_me_token を保存
   def set_remember_me_cookie(user)
     cookies.signed[:remember_me_token] = {
       value: user.remember_me_token,

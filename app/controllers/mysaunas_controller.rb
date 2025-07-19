@@ -3,7 +3,6 @@ class MysaunasController < ApplicationController
   before_action :require_login, except: [ :show_share ]
 
   def new
-    # ユーザーがすでにMysaunaを登録していれば編集画面にリダイレクト
     if current_user.mysauna
       redirect_to edit_mysauna_path(current_user.mysauna)
     else

@@ -1,7 +1,6 @@
 class DiagnosesController < ApplicationController
   skip_before_action :require_login, only: [ :survey, :answer, :create, :show ]
 
-  # マッピング定義
   TEMPERATURE_MAP = {
     "ゲキアツ" => "very_hot",
     "アツい" => "hot",
@@ -59,7 +58,6 @@ class DiagnosesController < ApplicationController
       redirect_to diagnosis_path(id: 0, no_result: true) and return
     end
 
-    # 完全一致で検索
     facilities = SaunaFacility.all
     facilities = facilities.where(temperature_level: TEMPERATURE_MAP[session[:answers]["1"]]) if session[:answers]["1"].present?
     facilities = facilities.where(outdoor_bath: true) if session[:answers]["2"] == "はい"
@@ -71,7 +69,6 @@ class DiagnosesController < ApplicationController
     Rails.logger.debug "完全一致で絞り込まれた施設: #{facilities.map(&:name).inspect}"
     @result = facilities.first
 
-    # 完全一致で見つからなかった場合 → 類似候補をスコア付きで検索
     if @result.nil?
       all_facilities = SaunaFacility.where("location LIKE ?", "%#{session[:answers]['7']}%")
       scored = all_facilities.map do |facility|
@@ -84,7 +81,6 @@ class DiagnosesController < ApplicationController
         { facility: facility, score: score }
       end
 
-      # スコアが2点以上の施設のみ対象にする
       filtered = scored.select { |s| s[:score] >= 2 }
       best_match = filtered.max_by { |s| s[:score] }
 

@@ -14,7 +14,6 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { password.present? }
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
-  # テスト用のヘルパーとして追加
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
